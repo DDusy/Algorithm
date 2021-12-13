@@ -34,37 +34,67 @@ short Parity(unsigned long long _x)
 		*/
 
 
-		/* 비트 1의 개수가 K 일때 O(k)
-		* Result ^= 1;	// 짝수 홀수 반복
-		* _x &= (_x - 1); // 하위비트를 지워가며 실행
-		*/
+		// 비트 1의 개수가 K 일때 O(k)
+		Result ^= 1;	// 짝수 홀수 반복
+		_x &= (_x - 1); // 하위비트를 지워가며 실행
+		
 	}
 
 	return Result;
 }
 
+long long PreCompute[1000001] = { 1,1,1,0,1,0,1,0};
 
-short ParityMask(unsigned long long _x)
+long long ParityMask(unsigned long long _x)
 {
-	const int MaskSize = 16;
-	const int BitMask = 0xffff;
+	//? 잘못했는데 아직 못찾음 캐시 저장을 어떻게 해야되나
+	/*const int MaskSize = 16;
+	const int BitMask = 0xFFFF;
 
-	return PreCompute[_x >> (3 * MaskSize)];
+	return PreCompute[_x >> (3 * MaskSize)] ^
+		PreCompute[(_x >> (2 * MaskSize)) & BitMask] ^
+		PreCompute[(_x>> MaskSize) & BitMask] ^
+		PreCompute[_x & BitMask];*/
+
+	_x ^= _x >> 32;
+	_x ^= _x >> 16;
+	_x ^= _x >> 8;
+	_x ^= _x >> 4;
+	_x ^= _x >> 2;
+	_x ^= _x >> 1;
+
+	return _x & 0x1;
 }
 
+long long BitSwap(long long _x, int i, int j)
+{
+	// 비트가 같은지 확인
+	if (((_x >> i) & 1) != ((_x >> j) & 1))
+	{
+		// * 1L은 long 타입의 리터럴 표시
+		unsigned long long BitMask = (1L << i) | (1L << j);
+		_x ^= BitMask;
+	}
+
+	return _x;
+}
+
+long long PreComputed[100000] = { 1,0,0,1,0,0,1,1, };
+
+long long ReverseBits(unsigned long long _x)
+{
+	const int MaskSize = 16;
+	const int BitMask = 0xFFFF;
+
+	return PreComputed[_x & BitMask] << (3 * MaskSize) |
+		PreComputed[(_x >> MaskSize) & BitMask] & (2 * MaskSize) |
+		PreComputed[(_x >> MaskSize) & BitMask] & (2 * MaskSize) |
+		PreComputed[(_x >> (2 * MaskSize)) & BitMask] <<MaskSize |
+		PreComputed[(_x >> (3* MaskSize))& BitMask];
+
+}
 
 int main()
 {
-    std::cout <<"Bit Count :	"<< Parity(11);
+    std::cout <<"Bit Swap :	"<< ReverseBits(8);
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
