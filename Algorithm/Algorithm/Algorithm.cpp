@@ -2,6 +2,11 @@
 //
 
 #include <iostream>
+#include <regex>
+#include <vector>
+#include <string>
+
+using namespace std;
 
 // 비트 수 만큼의 시간 복잡도 O(n)
 short FindBitCount(unsigned int _num) 
@@ -96,5 +101,64 @@ long long ReverseBits(unsigned long long _x)
 
 int main()
 {
-    std::cout <<"Bit Swap :	"<< ReverseBits(8);
+    std::cout <<"Bit Swap :	"<< ReverseBits(8)<<endl;
+
+	//..문자열 정규식 
+	/*
+	*  주어진 문자열이 주어진 규칙에 맞는지 확인할때
+	*  주어진 문자열에서 원하는 패턴의 문자열을 검색할 때
+	*  주어진 문자열에서 원하는 패턴의 문자열로 치환할 때
+	* 
+	* \d* 임의의 개수의 숫자
+	* . 임의의 문자 
+	* \\ 단락 시작
+	* 
+	* regex_match 정규식에대해 대상이 매치하는지 return bool
+	* 
+	* 
+	*/
+
+	vector<string> file_names = { "Test-123-file.txt" , "Test_5-file.txt" ,
+									"Test-db1-file.txt" ,"Test-12223-file.txt" ,"Test-rert-file.txt" };
+
+	
+	regex re("Test-\\d*-file\\.txt"); // 정규식 표현 개체
+	
+	//regex re("Test-\\d*-file\\.txt",regex::grep); // 정규식 표현 개체
+	//regex re("Test-\\d*-file\\.txt", regex::grep | regex::icase|regex::optimize); // 정규식 표현 개체
+
+
+	// default는 regex::ECMAScript 추가조건은 | 로 추가 icase는 대소문자 구분
+	//optimize를 통해 객체 생성시간 단축 (?)
+
+	for (const auto& filename : file_names)
+	{
+		cout << filename << "	: " << boolalpha << regex_match(filename, re) << endl;
+	}
+
+
+	//부분매칭
+
+	std::vector<std::string> phone_numbers = { "020-1234-5678", "01c-123-4567",
+											"011-1234-5567", "010-12345-6789",
+											"123-4567-8901", "010-1234-567" };
+	/*
+	* [가능한 숫자/문자]
+	* {문자 수}
+	*/
+	cout << "regex 부분 매칭" << endl;
+
+	regex re2("[01c]{3}-(\\d{3,4})-\\d{4}");
+
+	smatch match;
+	
+	for (const auto& number : phone_numbers)
+	{
+		cout << number << "	:	" << boolalpha << regex_match(number, re2) << endl;
+		
+	}
+
+
+	
+
 }
