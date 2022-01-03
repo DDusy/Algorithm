@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-
+#include <algorithm>
 
 
 using namespace std;
@@ -107,29 +107,29 @@ long long ReverseBits(unsigned long long _x)
 
 int main()
 {
-    std::cout <<"Bit Swap :	"<< ReverseBits(8)<<endl;
+	std::cout << "Bit Swap :	" << ReverseBits(8) << endl;
 
 	//..문자열 정규식 
 	/*
 	*  주어진 문자열이 주어진 규칙에 맞는지 확인할때
 	*  주어진 문자열에서 원하는 패턴의 문자열을 검색할 때
 	*  주어진 문자열에서 원하는 패턴의 문자열로 치환할 때
-	* 
+	*
 	* \d* 임의의 개수의 숫자
-	* . 임의의 문자 
+	* . 임의의 문자
 	* \\ 단락 시작
-	* 
+	*
 	* regex_match 정규식에대해 대상이 매치하는지 return bool
-	* 
-	* 
+	*
+	*
 	*/
 
 	vector<string> file_names = { "Test-123-file.txt" , "Test_5-file.txt" ,
 									"Test-db1-file.txt" ,"Test-12223-file.txt" ,"Test-rert-file.txt" };
 
-	
+
 	regex re("Test-\\d*-file\\.txt"); // 정규식 표현 개체
-	
+
 	//regex re("Test-\\d*-file\\.txt",regex::grep); // 정규식 표현 개체
 	//regex re("Test-\\d*-file\\.txt", regex::grep | regex::icase|regex::optimize); // 정규식 표현 개체
 
@@ -157,31 +157,118 @@ int main()
 	regex re2("[01c]{3}-(\\d{3,4})-\\d{4}");
 
 	smatch match;
-	
+
 	for (const auto& number : phone_numbers)
 	{
 		cout << number << "	:	" << boolalpha << regex_match(number, re2) << endl;
-		
+
 	}
 
 
-	MyVector<int> v;
 
-	v.reserve(10);
+	//MyVector<int> v;
 
-	for (int i = 0; i < 100; ++i)
+//	v.reserve(10);
+
+	//for (int i = 0; i < 100; ++i)
+	//{
+	//	v.push_back(i);
+	//}
+
+
+
+	//for (int i = 0; i < 100; ++i)
+	//{
+	//	cout << v[i] << ",";
+	//}
+
+
+	int cnt[26] = { 0, }; // 알파벳 26개
+	string Str;
+
+	cin >> Str;
+
+	for(char ch :Str)
 	{
-		v.push_back(i);
+		++cnt[ch - 'a'];
 	}
 
-	v.Pop_back();
-	v.Pop_back();
-	v.Pop_back();
-
-
-	for (int i = 0; i < 100; ++i)
+	for (int num : cnt)
 	{
-		cout<<v[i]<<",";
+		cout << num << " ";
 	}
+
+	
+#pragma  region 1번
+/*
+	int n, m;
+	cin >> n >> m;
+	int arr[100000] = {0,};
+	int sumArr[100000] = { 0, };
+
+	std::vector<int> v;
+	
+	//개선전
+	//for (int i = 0; i < n; ++i)
+	//	cin >> arr[i];
+
+	//int start=0, end = 0;
+	//for (int i = 0; i < m; ++i)
+	//{
+	//	cin >> start >> end ;
+
+	//	int sum = 0;
+	//	for (int j = start - 1; j < end; ++j)
+	//	{
+	//		sum += arr[j];
+	//	}
+
+	//	v.push_back(sum);
+	//}
+	//
+
+
+	//개선후
+	for (int i = 1; i <= n; ++i)
+	{
+		cin >> arr[i];
+		sumArr[i] = sumArr[i - 1] + arr[i];
+	}
+
+	int start=0, end = 0;
+
+	for (int i = 0; i < m; ++i)
+	{
+		cin >> start >> end ;
+
+		v.push_back(sumArr[end]-sumArr[start-1]);
+	}
+
+	cout << "결과" << endl;
+
+	for (int num : v)
+		cout << num << endl;
+
+*/
+
+#pragma  endregion
+
+
+	///////////////////////////////////////
+#pragma  region 2번
+	string str = "life is limited";
+
+	//1
+	cout << str.substr(0,3) << endl;
+
+	reverse(str.begin(), str.end());
+
+	cout <<str<< endl;
+
+	str += "dopa!!";
+
+		cout << str << endl;
+
+#pragma endregion
 
 }
