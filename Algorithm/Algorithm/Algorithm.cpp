@@ -105,7 +105,7 @@ long long ReverseBits(unsigned long long _x)
 
 }
 
-int main()
+int main1()
 {
 	std::cout << "Bit Swap :	" << ReverseBits(8) << endl;
 
@@ -183,20 +183,20 @@ int main()
 	//}
 
 
-	int cnt[26] = { 0, }; // 알파벳 26개
-	string Str;
+	//int cnt[26] = { 0, }; // 알파벳 26개
+	//string Str;
 
-	cin >> Str;
+	//cin >> Str;
 
-	for(char ch :Str)
-	{
-		++cnt[ch - 'a'];
-	}
+	//for(char ch :Str)
+	//{
+	//	++cnt[ch - 'a'];
+	//}
 
-	for (int num : cnt)
-	{
-		cout << num << " ";
-	}
+	//for (int num : cnt)
+	//{
+	//	cout << num << " ";
+	//}
 
 	
 #pragma  region 1번
@@ -256,7 +256,7 @@ int main()
 
 	///////////////////////////////////////
 #pragma  region 2번
-	string str = "life is limited";
+	/*string str = "life is limited";
 
 	//1
 	cout << str.substr(0,3) << endl;
@@ -268,7 +268,65 @@ int main()
 	str += "dopa!!";
 
 		cout << str << endl;
-
+*/
 #pragma endregion
 
+
+return 0;
+
+
+}
+
+
+int N = 0, tmp = 0, res = 0;
+
+int dx[] = { -1,0,1,0 };
+int dy[4] = { 0,1,0,-1 };
+
+bool checked[101][101] = { 0, };
+int board[101][101] = { 0, };
+void DFS(int x, int y)
+{
+	checked[x][y] = true;
+
+	if (board[x][y] > N) return;
+	for (int i = 0; i < 4; ++i)
+	{
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+
+		if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
+		if (!checked[nx][ny]) DFS(nx, ny);
+	}
+}
+
+int main()
+{
+
+	cin >> N;
+
+	for (int i = 0; i < N; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+		{
+			cin >> board[i][j];
+		}
+	}
+
+	for (int i = 0; i < N; ++i)
+	{
+		for (int j = 0; j < N; ++j)
+		{
+			if (!checked[i][j])
+			{
+				DFS(i, j);
+				++tmp;
+			}
+		}
+	}
+	res = max(res, tmp);
+
+
+	cout << res << endl;
+	return 0;
 }
