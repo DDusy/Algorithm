@@ -277,100 +277,212 @@ return 0;
 
 }
 
-//
-//int N = 0, tmp = 0, res = 0;
+#pragma region 2468 전역변수 & DFS함수
+//int N = 0, tmp = 0, res = 1;
 //
 //int dx[] = { -1,0,1,0 };
 //int dy[4] = { 0,1,0,-1 };
 //
 //bool checked[101][101] = { 0, };
 //int board[101][101] = { 0, };
+//int depthboard[101][101] = { 0, };
+//
+//
 //void DFS(int x, int y)
 //{
 //	checked[x][y] = true;
 //
-//	if (board[x][y] > N) return;
 //	for (int i = 0; i < 4; ++i)
 //	{
 //		int nx = x + dx[i];
 //		int ny = y + dy[i];
 //
 //		if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
-//		if (!checked[nx][ny]) DFS(nx, ny);
+//		if (!checked[nx][ny] && depthboard[nx][ny] == 0) DFS(nx, ny);
 //	}
 //}
-//
-//int main()
-//{
-//
-//	cin >> N;
-//
-//	for (int i = 0; i < N; ++i)
-//	{
-//		for (int j = 0; j < N; ++j)
-//		{
-//			cin >> board[i][j];
-//		}
-//	}
-//
-//	for (int i = 0; i < N; ++i)
-//	{
-//		for (int j = 0; j < N; ++j)
-//		{
-//			if (!checked[i][j])
-//			{
-//				DFS(i, j);
-//				++tmp;
-//			}
-//		}
-//	}
-//	res = max(res, tmp);
-//
-//
-//	cout << res << endl;
-//
-//	return 0;
-//}
-
-
-#include<iostream>
-
-using namespace std;
-
-int A = 0, B = 0, C = 0;
-int cnt[101] = { 0, };
+#pragma endregion
 
 int main()
 {
-	int Res = 0;
-	cin >> A >> B >> C;
 
-	int start = 0, end = 0;
-	for (int i = 0; i < 3; ++i)
-	{
-		cin >> start >> end;
+#pragma region 2468
+	//cin >> N;
 
-		for (int j = start; j < end; ++j) ++cnt[j];
-	}
+	//for (int i = 0; i < N; ++i)
+	//{
+	//	for (int j = 0; j < N; ++j)
+	//	{
+	//		cin >> board[i][j];
+	//	}
+	//}
 
 
-	for (int i = 1; i < 100; ++i)
-	{
-		switch (cnt[i])
-		{
-		case 1:
-			Res += A;
-			break;
-		case 2:
-			Res += B * 2;
-			break;
-		case 3:
-			Res += C * 3;
-			break;
-		}
-	}
+	//for (int depth = 1; depth < 101; ++depth)
+	//{
 
-	cout << Res << endl;
+	//	fill(&checked[0][0], &checked[0][0] + 101 * 101, 0);
+	//	tmp = 0;
+
+	//	for (int i = 0; i < N; ++i)
+	//	{
+	//		for (int j = 0; j < N; ++j)
+	//		{
+	//			if (depthboard[i][j] == 1) continue;
+
+	//			if (board[i][j]<=depth) depthboard[i][j] = 1;
+
+	//		}
+	//	}
+
+	//	for (int i = 0; i < N; ++i)
+	//	{
+	//		for (int j = 0; j < N; ++j)
+	//		{
+	//			if (!checked[i][j] && depthboard[i][j] == 0)
+	//			{
+	//				DFS(i, j);
+	//				++tmp;
+	//			}
+	//		}
+	//	}
+	//	res = max(res, tmp);
+
+	//}
+
+	//cout << res << endl;
+
+	//
+#pragma endregion
+#pragma region 10988
+	//string str;
+	//int res = 1;
+	//cin >> str;
+
+	//int range = str.length();
+	//for (int i = 0; i < range/2; ++i)
+	//{
+	//	if (str[i] != str[range - i-1])
+	//	{
+	//		res = 0;
+	//		break;
+	//	}
+	//}
+
+	//cout << res << endl;
+
+#pragma endregion
+
+#pragma region 1159
+
+	//int N = 0;
+	//cin >> N;
+	//int cnt[26] = {0,};
+	//vector<string> v(N);
+	//string Res="";
+
+	//for (int i = 0; i < N; ++i)
+	//{
+	//	cin >> v[i];
+	//	++cnt[v[i][0]-'a'];
+	//}
+
+	//for (int num=0;num<26;++num)
+	//{
+	//	if (cnt[num] >= 5)
+	//		Res += 'a' + num;
+	//}
+	//
+	//if(Res=="")
+	//cout <<"PREDAJA" << endl;
+	//else
+	//	cout <<Res<< endl;
+#pragma endregion
+
+#pragma region 11655
+	//string str;
+	//getline(cin,str);
+	//
+	//for (char& ch : str)
+	//{
+	//	if (ch >= 'a' && ch <= 'z')
+	//	{
+	//		if (ch + 13 > 'z') ch = ch - 13;
+	//		else ch += 13;
+	//	}
+	//	else if (ch >= 'A' && ch <= 'Z')
+	//	{
+	//		if (ch + 13 > 'Z') ch = ch - 13;
+	//		else ch += 13;
+	//	}
+	//}
+
+	//cout << str;
+
+#pragma endregion
+
+
+#pragma region 9996
+
+//int N = 0;
+//cin >> N;
+//string input,pattern, filename,pre,last;
+//vector<string> Res(N);
+//cin >> input;
+//
+////pattern = input[0];
+////pattern += ".";
+////pattern += input.substr(1);
+//
+//
+//
+//int pos= input.find("*");
+//
+//pre = input.substr(0, pos);
+//last = input.substr(pos + 1);
+//
+//
+//regex re(pre + ".*" + last);
+//
+//for (int i = 0; i < N; ++i)
+//{
+//	cin >> filename;
+//
+//	//
+//	//if (pre == filename.substr(0, pos) && last == filename.substr(filename.length() - last.length()))
+//	if(regex_match(filename,re))
+//		Res[i] = "DA";
+//	else
+//		Res[i] = "NE";
+//}
+//
+//
+//for (string str : Res)
+//cout << str << endl;
+
+#pragma endregion 9996
+
+
+#pragma region 2559
+int N = 0, K = 0,res=0;
+int sum[100] = {0,};
+cin >> N >> K;
+
+vector<int> v(N+1);
+
+for (int i = 1; i <= N; ++i)
+{
+	cin >> v[i];
+	sum[i] = sum[i - 1] + v[i];
+}
+
+for (int i = K; i <= N; i++)
+{
+	res = max(res, (sum[i]-sum[i-K]));
+}
+cout << res << endl;
+
+#pragma endregion 2559
 
 	return 0;
 }
