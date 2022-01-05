@@ -277,56 +277,100 @@ return 0;
 
 }
 
+//
+//int N = 0, tmp = 0, res = 0;
+//
+//int dx[] = { -1,0,1,0 };
+//int dy[4] = { 0,1,0,-1 };
+//
+//bool checked[101][101] = { 0, };
+//int board[101][101] = { 0, };
+//void DFS(int x, int y)
+//{
+//	checked[x][y] = true;
+//
+//	if (board[x][y] > N) return;
+//	for (int i = 0; i < 4; ++i)
+//	{
+//		int nx = x + dx[i];
+//		int ny = y + dy[i];
+//
+//		if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
+//		if (!checked[nx][ny]) DFS(nx, ny);
+//	}
+//}
+//
+//int main()
+//{
+//
+//	cin >> N;
+//
+//	for (int i = 0; i < N; ++i)
+//	{
+//		for (int j = 0; j < N; ++j)
+//		{
+//			cin >> board[i][j];
+//		}
+//	}
+//
+//	for (int i = 0; i < N; ++i)
+//	{
+//		for (int j = 0; j < N; ++j)
+//		{
+//			if (!checked[i][j])
+//			{
+//				DFS(i, j);
+//				++tmp;
+//			}
+//		}
+//	}
+//	res = max(res, tmp);
+//
+//
+//	cout << res << endl;
+//
+//	return 0;
+//}
 
-int N = 0, tmp = 0, res = 0;
 
-int dx[] = { -1,0,1,0 };
-int dy[4] = { 0,1,0,-1 };
+#include<iostream>
 
-bool checked[101][101] = { 0, };
-int board[101][101] = { 0, };
-void DFS(int x, int y)
-{
-	checked[x][y] = true;
+using namespace std;
 
-	if (board[x][y] > N) return;
-	for (int i = 0; i < 4; ++i)
-	{
-		int nx = x + dx[i];
-		int ny = y + dy[i];
-
-		if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
-		if (!checked[nx][ny]) DFS(nx, ny);
-	}
-}
+int A = 0, B = 0, C = 0;
+int cnt[101] = { 0, };
 
 int main()
 {
+	int Res = 0;
+	cin >> A >> B >> C;
 
-	cin >> N;
-
-	for (int i = 0; i < N; ++i)
+	int start = 0, end = 0;
+	for (int i = 0; i < 3; ++i)
 	{
-		for (int j = 0; j < N; ++j)
+		cin >> start >> end;
+
+		for (int j = start; j < end; ++j) ++cnt[j];
+	}
+
+
+	for (int i = 1; i < 100; ++i)
+	{
+		switch (cnt[i])
 		{
-			cin >> board[i][j];
+		case 1:
+			Res += A;
+			break;
+		case 2:
+			Res += B * 2;
+			break;
+		case 3:
+			Res += C * 3;
+			break;
 		}
 	}
 
-	for (int i = 0; i < N; ++i)
-	{
-		for (int j = 0; j < N; ++j)
-		{
-			if (!checked[i][j])
-			{
-				DFS(i, j);
-				++tmp;
-			}
-		}
-	}
-	res = max(res, tmp);
+	cout << Res << endl;
 
-
-	cout << res << endl;
 	return 0;
 }
