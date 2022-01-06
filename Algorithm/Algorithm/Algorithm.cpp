@@ -8,6 +8,7 @@
 #include <regex>
 #include <vector>
 #include <string>
+#include <map>
 
 #include <algorithm>
 
@@ -464,25 +465,55 @@ int main()
 
 
 #pragma region 2559
-int N = 0, K = 0,res=0;
-int sum[100] = {0,};
-cin >> N >> K;
-
-vector<int> v(N+1);
-
-for (int i = 1; i <= N; ++i)
-{
-	cin >> v[i];
-	sum[i] = sum[i - 1] + v[i];
-}
-
-for (int i = K; i <= N; i++)
-{
-	res = max(res, (sum[i]-sum[i-K]));
-}
-cout << res << endl;
+//int N = 0, K = 0,res=0;
+//int sum[100] = {0,};
+//cin >> N >> K;
+//
+//vector<int> v(N+1);
+//
+//for (int i = 1; i <= N; ++i)
+//{
+//	cin >> v[i];
+//	sum[i] = sum[i - 1] + v[i];
+//}
+//
+//for (int i = K; i <= N; i++)
+//{
+//	res = max(res, (sum[i]-sum[i-K]));
+//}
+//cout << res << endl;
 
 #pragma endregion 2559
 
+#pragma region 1620
+
+string PokeStr;
+map<string, int> map_name;
+map<int, string> map_num;
+
+int N = 1, M = 1;
+
+cin >> N >> M;
+
+for (int i = 0; i < N; ++i)
+{
+	cin >> PokeStr;
+	map_name[PokeStr] = i + 1;
+	map_num[i + 1] = PokeStr;
+}
+
+for (int i = 0; i < M; ++i)
+{
+	cin >> PokeStr;
+	if (atoi(PokeStr.c_str()) == 0)
+	{
+		cout << map_name[PokeStr] << endl;
+	}
+	else
+	{
+		cout << map_num[atoi(PokeStr.c_str())] << endl;
+	}
+}
+#pragma endregion 1620
 	return 0;
 }
