@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 #include <map>
-
+#include <stack>
 #include <algorithm>
 
 
@@ -590,35 +590,104 @@ int main()
 
 #pragma region 1940
 
-int N = 0,M=0,res=0;
-
-cin >> N>>M;
-vector<int> v(N);
-
-for (int i = 0; i < N; ++i)
-	cin >> v[i];
-
-if (M > 200000)
-{
-	cout << 0 << "\n";
-	return 0;
-}
-
-sort(v.begin(), v.end());
-
-	for (int i = 0; i < N; i++) {
-		for (int j = i + 1; j < N; j++) {
-			if (v[i] + v[j] == M)
-				++res;
-		}
-	}
-	cout << res << "\n";
+//int N = 0,M=0,res=0;
+//
+//cin >> N>>M;
+//vector<int> v(N);
+//
+//for (int i = 0; i < N; ++i)
+//	cin >> v[i];
+//
+//if (M > 200000)
+//{
+//	cout << 0 << "\n";
+//	return 0;
+//}
+//
+//sort(v.begin(), v.end());
+//
+//	for (int i = 0; i < N; i++) {
+//		for (int j = i + 1; j < N; j++) {
+//			if (v[i] + v[j] == M)
+//				++res;
+//		}
+//	}
+//	cout << res << "\n";
 
 #pragma endregion 1940
 
 #pragma region 3986
+
+//ios_base::sync_with_stdio(false);
+//cin.tie(NULL); cout.tie(NULL);
+//
+//int N = 0,res=0;
+//string s;
+//
+//cin>> N;
+//
+//for (int i = 0; i < N; ++i)
+//{
+//	stack<char> stk;
+//
+//	cin >> s;
+//
+//	for (char ch : s)
+//	{
+//		if (!stk.empty() && stk.top() == ch)
+//			stk.pop();
+//		else
+//		stk.push(ch);
+//	}
+//
+//	if (!stk.size())
+//		++res;
+//}
+//
+//cout << res << endl;
 #pragma endregion 3986
 
+#pragma region 1629
 
+ios_base::sync_with_stdio(false);
+cin.tie(NULL); cout.tie(NULL);
+//
+//long long a = 0,b=0,c=0;
+//cin >> a >> b >> c;
+//
+//if (b == 1) cout<<a% c<<endl;
+//	
+//
+
+
+#pragma endregion 1629
+
+#pragma region 4375
+
+//int N = 0;
+//
+//while (scanf_s("%d",&N)!=EOF)
+//{
+//	int cnt = 1, res = 1;
+//
+//	while (true)
+//	{
+//		if (cnt % N == 0)
+//		{
+//			cout << res << "\n";
+//			break;
+//		}
+//		else
+//		{
+//			cnt = (cnt * 10) + 1;
+//			cnt %= N;
+//			++res;
+//		}
+//	}
+//}
+
+
+
+#pragma endregion 4375
 	return 0;
 }
