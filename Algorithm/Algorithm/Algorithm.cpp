@@ -487,33 +487,138 @@ int main()
 
 #pragma region 1620
 
-string PokeStr;
-map<string, int> map_name;
-map<int, string> map_num;
+//string PokeStr;
+//map<string, int> map_name;
+//map<int, string> map_num;
+//
+//int N = 1, M = 1;
+//
+//cin >> N >> M;
+//
+//for (int i = 0; i < N; ++i)
+//{
+//	cin >> PokeStr;
+//	map_name[PokeStr] = i + 1;
+//	map_num[i + 1] = PokeStr;
+//}
+//
+//for (int i = 0; i < M; ++i)
+//{
+//	cin >> PokeStr;
+//	if (atoi(PokeStr.c_str()) == 0)
+//	{
+//		cout << map_name[PokeStr] << endl;
+//	}
+//	else
+//	{
+//		cout << map_num[atoi(PokeStr.c_str())] << endl;
+//	}
+//}
+#pragma endregion 1620
 
-int N = 1, M = 1;
 
-cin >> N >> M;
+#pragma region 1213
+
+//int cnt[123] = { 0, }, flag = 0;
+//string input, res;
+//char mid = ' ';
+//
+//cin >> input;
+//
+//for (char ch : input)
+//++cnt[ch];
+//
+//for (int i = 'Z'; i >= 'A'; --i)
+//{
+//	if (cnt[i])
+//	{
+//		if (cnt[i] & 1)
+//		{
+//			mid = (char)i;
+//			--cnt[i];
+//			++flag;
+//			if (2 == flag) break;
+//		}
+//
+//		for (int j = 0; j < cnt[i]; j += 2)
+//		{
+//			res = (char)(i)+res;
+//			res += (char)i;
+//		}
+//	}
+//}
+//
+//	if (flag == 2)
+//	 cout << "I'm Sorry Hansoo" << endl;
+//	else
+//	{
+//		if(mid!=' ')
+//		res.insert(res.begin()+ res.size()/2, mid);
+//		cout << res << endl;
+//	}
+#pragma endregion 1213
+
+#pragma region 9375
+//string type, pos;
+//map<string, int> tb;
+//int N = 0, T = 0;
+//long long res = 0;
+//
+//cin >> T;
+//
+//while (T--)
+//{
+//	res = 1;
+//	tb.clear();
+//
+//	cin >> N;
+//	for (int i = 0; i < N; ++i)
+//	{
+//		cin >> type >> pos;
+//		++tb[pos];
+//	}
+//
+//	for (auto d : tb)
+//	{
+//		res *= (long long)d.second + 1;
+//	}
+//	--res;
+//
+//	cout << res << endl;
+//}
+#pragma endregion 9375
+
+#pragma region 1940
+
+int N = 0,M=0,res=0;
+
+cin >> N>>M;
+vector<int> v(N);
 
 for (int i = 0; i < N; ++i)
+	cin >> v[i];
+
+if (M > 200000)
 {
-	cin >> PokeStr;
-	map_name[PokeStr] = i + 1;
-	map_num[i + 1] = PokeStr;
+	cout << 0 << "\n";
+	return 0;
 }
 
-for (int i = 0; i < M; ++i)
-{
-	cin >> PokeStr;
-	if (atoi(PokeStr.c_str()) == 0)
-	{
-		cout << map_name[PokeStr] << endl;
+sort(v.begin(), v.end());
+
+	for (int i = 0; i < N; i++) {
+		for (int j = i + 1; j < N; j++) {
+			if (v[i] + v[j] == M)
+				++res;
+		}
 	}
-	else
-	{
-		cout << map_num[atoi(PokeStr.c_str())] << endl;
-	}
-}
-#pragma endregion 1620
+	cout << res << "\n";
+
+#pragma endregion 1940
+
+#pragma region 3986
+#pragma endregion 3986
+
+
 	return 0;
 }
