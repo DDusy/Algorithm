@@ -11,7 +11,7 @@
 #include <map>
 #include <stack>
 #include <algorithm>
-
+#include <queue>
 
 using namespace std;
 
@@ -649,15 +649,23 @@ int main()
 
 #pragma region 1629
 
-ios_base::sync_with_stdio(false);
-cin.tie(NULL); cout.tie(NULL);
+//ios_base::sync_with_stdio(false);
+//cin.tie(NULL); cout.tie(NULL);
+
+//long long a, b, c;
+//함수로
+//long long Divide(long long _a, long long _b)
+//{
+//	if (_b == 1) return _a % c;
+//	long long _c = Divide(_a, _b / 2);
+//	_c = (_c * _c) % c;
 //
-//long long a = 0,b=0,c=0;
+//	if (_b & 1)_c = (_c * _a) % c;
+//	return _c;
+//}
+//
 //cin >> a >> b >> c;
-//
-//if (b == 1) cout<<a% c<<endl;
-//	
-//
+//cout << Divide(a, b) << "\n";
 
 
 #pragma endregion 1629
@@ -666,28 +674,80 @@ cin.tie(NULL); cout.tie(NULL);
 
 //int N = 0;
 //
-//while (scanf_s("%d",&N)!=EOF)
+//while (scanf_s("%d", &N) != EOF)
 //{
 //	int cnt = 1, res = 1;
 //
 //	while (true)
 //	{
-//		if (cnt % N == 0)
+//		if (cnt % N == 0)	// N의 배수인지 체크
 //		{
 //			cout << res << "\n";
 //			break;
 //		}
 //		else
-//		{
+//		{	//11... 추가하고 N으로 나누기
 //			cnt = (cnt * 10) + 1;
 //			cnt %= N;
 //			++res;
 //		}
 //	}
 //}
-
-
-
 #pragma endregion 4375
+
+#pragma region 2178
+
+//// bfs
+//int dx[] = { -1,0,1,0 };
+//int dy[] = { 0,1,0,-1 };
+//int n = 0, m = 0;
+//queue<pair<int,int>> q;
+//
+//scanf_s("%d%d",&n, &m);
+//
+//vector<vector<int>> v(n,vector<int>(m));
+//vector<vector<bool>> checked(n, vector<bool>(m,false));
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < m; ++j)
+//			scanf_s("%1d",&v[i][j]);
+//	}
+//
+//	checked[0][0] = true;
+//	q.push({ 0,0 });
+//
+//	while (q.size())
+//	{
+//		
+//		int cur_x =q.front().first;
+//		int cur_y =q.front().second;
+//
+//		q.pop();
+//
+//		for (int i = 0; i < 4; ++i)
+//		{
+//			int nx = cur_x + dx[i];
+//			int ny = cur_y + dy[i];
+//
+//			if (nx<0 || ny<0 || nx>=n || ny>=m || (v[nx][ny] == 0)) continue;
+//			if (checked[nx][ny]) continue;
+//
+//			v[nx][ny] = v[cur_x][cur_y] + 1;
+//
+//			q.push({ nx,ny });
+//			checked[nx][ny] = true;
+//		}
+//
+//	}
+//
+//	cout <<v[n-1][m-1]<<endl;
+
+#pragma endregion 2178
+
+#pragma region 1012
+
+int T = 0,M=0,N=0,X=0,Y=0;
+#pragma endregion 1012
 	return 0;
 }
