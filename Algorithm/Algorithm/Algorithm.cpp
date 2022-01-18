@@ -303,9 +303,89 @@ return 0;
 //	}
 //}
 #pragma endregion
+int dx[] = { -1,0,1,0 };
+int dy[] = { 0,1,0,-1 };
+
+int cnt = 0;
+//int m, n, k, x, y, res, nx, ny, t;
+//vector<vector<int>> v;
+//vector<vector<bool>> checked;
+//
+//void dfs(int _x, int _y)
+//{
+//	checked[_x][_y] = true;
+//
+//	for (int i = 0; i < 4; ++i)
+//	{
+//		nx = _x + dx[i];
+//		ny = _y + dy[i];
+//
+//		if (nx < 0 || ny < 0 || nx >= m || ny >= n) continue;
+//		if ((v[nx][ny] == 1) && !checked[nx][ny])
+//		{
+//			dfs(nx, ny);
+//		}
+//	}
+//	return;
+//}
+
+//2
+//int m, n, k, posx1, posx2, posy1, posy2;
+//
+//void dfs(int _x, int _y,vector<vector<int>>& _v, vector<vector<bool>>& _check)
+//{
+//	_check[_x][_y] = true;
+//
+//	for (int i = 0; i < 4; ++i)
+//	{
+//		int nx = _x + dx[i];
+//		int ny = _y + dy[i];
+//
+//		if (nx < 0 || ny<0 || nx >= m || ny>=n) continue;
+//
+//		if (!_check[nx][ny] && (_v[nx][ny] == 0))
+//		{
+//			++cnt;
+//			dfs(nx, ny,_v,_check);
+//
+//		}
+//
+//	}
+
+//}
+
+string quard(int _x, int _y, int _size, vector<vector<int>>& _v)
+{
+	if (_size == 1)	return string(1, _v[_y][_x]); // 0,1 출력
+	char b = _v[_y][_x];
+
+	string res = "";
+
+	for (int i = _y; i < _y + _size; ++i)
+	{
+		for (int j = _x; j < _x + _size; ++j)
+		{
+			if (b != _v[i][j])
+			{
+				res += "(";
+				res += quard(_x, _y, _size / 2,_v);
+				res += quard(_x+ _size / 2, _y, _size / 2,_v);
+				res += quard(_x, _y+ _size / 2, _size / 2,_v);
+				res += quard(_x + _size / 2, _y + _size / 2, _size / 2, _v);
+				res += ")";
+
+				return res;
+			}
+		}
+	}
+	
+	return string(1, _v[_y][_x]);
+}
 
 int main()
 {
+
+#pragma region last
 
 #pragma region 2468
 	//cin >> N;
@@ -422,7 +502,6 @@ int main()
 
 #pragma endregion
 
-
 #pragma region 9996
 
 //int N = 0;
@@ -462,7 +541,6 @@ int main()
 //cout << str << endl;
 
 #pragma endregion 9996
-
 
 #pragma region 2559
 //int N = 0, K = 0,res=0;
@@ -747,7 +825,137 @@ int main()
 
 #pragma region 1012
 
-int T = 0,M=0,N=0,X=0,Y=0;
+
+ios_base::sync_with_stdio(false);
+cin.tie(NULL); cout.tie(NULL);
+//cin >> t;
+//
+//while (t--)
+//{
+//
+//	res = 0;
+//	cin >> m >> n >> k;
+//
+//	fill(checked.begin(), checked.end(), vector<bool>(n,false));
+//	fill(v.begin(), v.end(), vector<int>(n, 0));
+//
+//	for (int i = 0; i < k; ++i)
+//	{
+//		cin >> x >> y;
+//		v[x][y] = 1;
+//	}
+//
+//	for (int i = 0; i < m; ++i)
+//	{
+//		for (int j = 0; j < n; ++j)
+//		{
+//			if ((1 == v[i][j]) && !checked[i][j])
+//			{
+//				dfs(i, j);
+//				++res;
+//			}
+//		}
+//	}
+//
+//	cout << res << endl;
+//}
+
 #pragma endregion 1012
-	return 0;
+
+#pragma region 2583
+
+//
+//
+//cin >> m >> n >> k;
+//
+//vector<vector<int>> v(m, vector<int>(n, 0));
+//vector<vector<bool>> checked(m, vector<bool>(n, false));
+//vector<int> res;
+//
+//for (int i = 0; i < k; ++i)
+//{
+//	cin >> posx1 >> posy1 >> posx2 >> posy2;
+//
+//	for (int j = m-posy2; j < (m-posy1); ++j)
+//	{
+//		for (int h = posx1; h < posx2; ++h)
+//		{
+//			v[j][h] = 1;
+//		}
+//	}
+//}
+//
+//for (int i = 0; i < m; ++i)
+//{
+//	for (int j = 0; j < n; ++j)
+//	{
+//		if (!checked[i][j]&& (0==v[i][j]))
+//		{
+//			cnt = 1;
+//			dfs(i, j,v,checked);
+//			res.push_back(cnt);
+//		}
+//	}
+//}
+//
+//cout << res.size() << endl;
+//
+//sort(res.begin(), res.end());
+//	for (int r : res)
+//	cout << r << " ";
+
+#pragma endregion 2583
+
+#pragma endregion last
+
+#pragma region 1992
+
+//int n;
+//cin >> n;
+//vector<vector<int>> v(n+1, vector<int>(n+1, 0));
+//
+//string s;
+//
+//for (int i = 0; i <n; ++i)
+//{
+//	cin >> s;
+//
+//	for (int j = 0; j <n; ++j)
+//	{
+//		v[i][j]=s[j];
+//	}
+//}
+//
+//cout << quard(0, 0, n,v) << endl;
+#pragma endregion 1992
+
+int n, m, j, l, r, tmp, res=0;
+
+cin >> n >> m >> j;
+l = 1;
+
+for (int i = 0; i < j; ++i)
+{
+	r = l + m - 1; // 바구니 범위
+	cin >> tmp;
+
+	if (tmp >= l && tmp <= r) continue;	// 범위안이면 필요X
+	else
+	{
+		if (tmp < l)
+		{
+			res += (l - tmp);
+			l = tmp;
+		}
+		else
+		{
+			l += (tmp - r);
+			res += (tmp - r);
+
+		}
+	}
+}
+
+cout << res << endl;
+ 	return 0;
 }
