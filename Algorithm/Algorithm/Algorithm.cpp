@@ -383,16 +383,14 @@ string quard(int _x, int _y, int _size, vector<vector<int>>& _v)
 	return string(1, _v[_y][_x]);
 }
 
-unordered_map<int,pair<int,int>> tb;
 
-bool cmp(tuple<int, int, int> _a, tuple<int, int, int> _b)
+
+bool Isvowel(char& _ch)
 {
-	if (get<1>(_a) == get<1>(_b))
-	{
-		return get<2>(_a) < get<2>(_b);
-	}
+	if (_ch == 'a' || _ch == 'e'|| _ch == 'i' || _ch == 'o' || _ch == 'u')
+		return true;
 
-	return get<1>(_a) > get<1>(_b);
+	return false;
 }
 
 int main()
@@ -938,7 +936,9 @@ cin.tie(NULL); cout.tie(NULL);
 //}
 //
 //cout << quard(0, 0, n,v) << endl;
+
 #pragma endregion 1992
+
 
 //int n, m, j, l, r, tmp, res=0;
 //
@@ -969,34 +969,105 @@ cin.tie(NULL); cout.tie(NULL);
 //
 //cout << res << endl;
 
+#pragma region 2910
+
+//unordered_map<int, pair<int, int>> tb;
+//
+//bool cmp(tuple<int, int, int> _a, tuple<int, int, int> _b)
+//{
+//	if (get<1>(_a) == get<1>(_b))
+//	{
+//		return get<2>(_a) < get<2>(_b);
+//	}
+//
+//	return get<1>(_a) > get<1>(_b);
+//}
+
+
+//vector<tuple<int, int, int>> v;
+//int N = 0, C = 0, tmp = 0;
+//
+//cin >> N >> C;
+//for (int i = 0; i < N; ++i)
+//{
+//	cin >> tmp;
+//
+//	if (tb[tmp].first == 0)
+//		tb[tmp].second += i;
+//
+//	++tb[tmp].first;
+//}
+//
+//for (auto iter : tb)
+//{
+//	v.push_back({ iter.first, iter.second.first,iter.second.second });
+//}
+//
+//sort(v.begin(), v.end(), cmp);
+//
+//for (auto iter : v)
+//{
+//	for (int i = 0; i < get<1>(iter); ++i)
+//		cout << get<0>(iter) << " ";
+//}
+
+#pragma endregion 2910
+
+
+#pragma region 4659번
+//string s;
+//int consonant = 0, vowel = 0, size = 0,cnt=0;
+//bool ischeck = true;
+//
+//
+//	while (true)
+//	{
+//	cin >> s;
+//
+//	if (s == "end")
+//		break;
+//
+//	size = s.length();
+//	ischeck = true;
+//
+//	cnt = 0;
+//	consonant = 0;
+//	vowel = 0;
+//	
+//	for (int i=0;i<size;++i)
+//	{
+//		if (i > 0 && (s[i] == s[i - 1])&& (s[i] != 'e'&& s[i] != 'o'))
+//		{
+//			ischeck=false;
+//			break;
+//		}
+//
+//		if (Isvowel(s[i]))
+//		{
+//			++vowel, consonant = 0;
+//			++cnt;
+//		}
+//		else
+//		{
+//			++consonant, vowel = 0;
+//		}
+//
+//		if (vowel > 2 || consonant > 2)
+//		{
+//			ischeck = false;
+//			break;
+//		}
+//	}
+//
+//	if (ischeck&& cnt>0)
+//		cout << "<" << s << ">" << " is acceptable." << endl;
+//	else
+//		cout << "<" << s << ">" << " is not acceptable." << endl;
+//	
+//	}
+#pragma endregion 4659번
 #pragma endregion last
 
-	vector<tuple<int, int,int>> v;
-	int N=0, C=0,tmp=0;
-	
-	cin >> N >> C;
-	for (int i = 0; i < N; ++i)
-	{
-		cin >> tmp;
-
-		if(tb[tmp].first==0)
-			tb[tmp].second+=i;
-
-		++tb[tmp].first;
-	}
-	
-	for (auto iter : tb)
-	{
-		v.push_back({ iter.first, iter.second.first,iter.second.second});
-	}
-
-	sort(v.begin(), v.end(), cmp);
-
-	for (auto iter : v)
-	{
-		for(int i=0;i<get<1>(iter);++i)
-		cout << get<0>(iter) << " ";
-	}
 
 
  	return 0;
