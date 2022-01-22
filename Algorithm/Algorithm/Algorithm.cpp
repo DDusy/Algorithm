@@ -12,6 +12,7 @@
 #include <stack>
 #include <algorithm>
 #include <queue>
+#include <unordered_map>
 
 using namespace std;
 
@@ -380,6 +381,18 @@ string quard(int _x, int _y, int _size, vector<vector<int>>& _v)
 	}
 	
 	return string(1, _v[_y][_x]);
+}
+
+unordered_map<int,pair<int,int>> tb;
+
+bool cmp(tuple<int, int, int> _a, tuple<int, int, int> _b)
+{
+	if (get<1>(_a) == get<1>(_b))
+	{
+		return get<2>(_a) < get<2>(_b);
+	}
+
+	return get<1>(_a) > get<1>(_b);
 }
 
 int main()
@@ -906,8 +919,6 @@ cin.tie(NULL); cout.tie(NULL);
 
 #pragma endregion 2583
 
-#pragma endregion last
-
 #pragma region 1992
 
 //int n;
@@ -929,33 +940,64 @@ cin.tie(NULL); cout.tie(NULL);
 //cout << quard(0, 0, n,v) << endl;
 #pragma endregion 1992
 
-int n, m, j, l, r, tmp, res=0;
+//int n, m, j, l, r, tmp, res=0;
+//
+//cin >> n >> m >> j;
+//l = 1;
+//
+//for (int i = 0; i < j; ++i)
+//{
+//	r = l + m - 1; // 바구니 범위
+//	cin >> tmp;
+//
+//	if (tmp >= l && tmp <= r) continue;	// 범위안이면 필요X
+//	else
+//	{
+//		if (tmp < l)
+//		{
+//			res += (l - tmp);
+//			l = tmp;
+//		}
+//		else
+//		{
+//			l += (tmp - r);
+//			res += (tmp - r);
+//
+//		}
+//	}
+//}
+//
+//cout << res << endl;
 
-cin >> n >> m >> j;
-l = 1;
+#pragma endregion last
 
-for (int i = 0; i < j; ++i)
-{
-	r = l + m - 1; // 바구니 범위
-	cin >> tmp;
-
-	if (tmp >= l && tmp <= r) continue;	// 범위안이면 필요X
-	else
+	vector<tuple<int, int,int>> v;
+	int N=0, C=0,tmp=0;
+	
+	cin >> N >> C;
+	for (int i = 0; i < N; ++i)
 	{
-		if (tmp < l)
-		{
-			res += (l - tmp);
-			l = tmp;
-		}
-		else
-		{
-			l += (tmp - r);
-			res += (tmp - r);
+		cin >> tmp;
 
-		}
+		if(tb[tmp].first==0)
+			tb[tmp].second+=i;
+
+		++tb[tmp].first;
 	}
-}
+	
+	for (auto iter : tb)
+	{
+		v.push_back({ iter.first, iter.second.first,iter.second.second});
+	}
 
-cout << res << endl;
+	sort(v.begin(), v.end(), cmp);
+
+	for (auto iter : v)
+	{
+		for(int i=0;i<get<1>(iter);++i)
+		cout << get<0>(iter) << " ";
+	}
+
+
  	return 0;
 }
