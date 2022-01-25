@@ -393,6 +393,12 @@ bool Isvowel(char& _ch)
 	return false;
 }
 
+
+bool cmp(string _a, string _b)
+{
+	if (_a.size() == _b.size()) return _a < _b;
+	return _a.size() < _b.size();
+}
 int main()
 {
 
@@ -1068,7 +1074,69 @@ cin.tie(NULL); cout.tie(NULL);
 #pragma endregion 4659번
 #pragma endregion last
 
+#pragma region 2870
+
+int N = 0;
+string s,numstr;
+vector<string> v;
+cin >> N;
+
+for (int i = 0; i < N; ++i)
+{
+	cin >> s;
+	
+	for (char ch : s)
+	{
+		if (ch >= '0' && ch <= '9')
+		{
+			numstr += ch;
+		}
+		else
+		{
+			if (numstr.size())
+			{
+				while (true)
+				{
+					if (numstr.size() && numstr.front() == '0')
+						numstr.erase(numstr.begin());
+					else
+						break;
+				}
+
+				if (!numstr.size()) numstr = "0";
+				v.push_back(numstr);
+				numstr="";
+
+			}
+
+		
+		}
+	}
 
 
+	if (numstr.size())
+	{
+		while (true)
+		{
+			if (numstr.size() && numstr.front() == '0')
+				numstr.erase(numstr.begin());
+			else
+				break;
+		}
+
+		if (!numstr.size()) numstr = "0";
+		v.push_back(numstr);
+
+		numstr = "";
+
+	}
+}
+
+	sort(v.begin(), v.end(), cmp);
+
+	for (string num : v)
+		cout << num << endl;
+
+#pragma endregion 2870
  	return 0;
 }
