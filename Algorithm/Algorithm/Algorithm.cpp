@@ -394,749 +394,150 @@ bool Isvowel(char& _ch)
 }
 
 
-bool cmp(string _a, string _b)
-{
-	if (_a.size() == _b.size()) return _a < _b;
-	return _a.size() < _b.size();
-}
+
 int main()
 {
 
 #pragma region last
-
-#pragma region 2468
-	//cin >> N;
-
-	//for (int i = 0; i < N; ++i)
-	//{
-	//	for (int j = 0; j < N; ++j)
-	//	{
-	//		cin >> board[i][j];
-	//	}
-	//}
-
-
-	//for (int depth = 1; depth < 101; ++depth)
-	//{
-
-	//	fill(&checked[0][0], &checked[0][0] + 101 * 101, 0);
-	//	tmp = 0;
-
-	//	for (int i = 0; i < N; ++i)
-	//	{
-	//		for (int j = 0; j < N; ++j)
-	//		{
-	//			if (depthboard[i][j] == 1) continue;
-
-	//			if (board[i][j]<=depth) depthboard[i][j] = 1;
-
-	//		}
-	//	}
-
-	//	for (int i = 0; i < N; ++i)
-	//	{
-	//		for (int j = 0; j < N; ++j)
-	//		{
-	//			if (!checked[i][j] && depthboard[i][j] == 0)
-	//			{
-	//				DFS(i, j);
-	//				++tmp;
-	//			}
-	//		}
-	//	}
-	//	res = max(res, tmp);
-
-	//}
-
-	//cout << res << endl;
-
-	//
-#pragma endregion
-#pragma region 10988
-	//string str;
-	//int res = 1;
-	//cin >> str;
-
-	//int range = str.length();
-	//for (int i = 0; i < range/2; ++i)
-	//{
-	//	if (str[i] != str[range - i-1])
-	//	{
-	//		res = 0;
-	//		break;
-	//	}
-	//}
-
-	//cout << res << endl;
-
-#pragma endregion
-
-#pragma region 1159
-
-	//int N = 0;
-	//cin >> N;
-	//int cnt[26] = {0,};
-	//vector<string> v(N);
-	//string Res="";
-
-	//for (int i = 0; i < N; ++i)
-	//{
-	//	cin >> v[i];
-	//	++cnt[v[i][0]-'a'];
-	//}
-
-	//for (int num=0;num<26;++num)
-	//{
-	//	if (cnt[num] >= 5)
-	//		Res += 'a' + num;
-	//}
-	//
-	//if(Res=="")
-	//cout <<"PREDAJA" << endl;
-	//else
-	//	cout <<Res<< endl;
-#pragma endregion
-
-#pragma region 11655
-	//string str;
-	//getline(cin,str);
-	//
-	//for (char& ch : str)
-	//{
-	//	if (ch >= 'a' && ch <= 'z')
-	//	{
-	//		if (ch + 13 > 'z') ch = ch - 13;
-	//		else ch += 13;
-	//	}
-	//	else if (ch >= 'A' && ch <= 'Z')
-	//	{
-	//		if (ch + 13 > 'Z') ch = ch - 13;
-	//		else ch += 13;
-	//	}
-	//}
-
-	//cout << str;
-
-#pragma endregion
-
-#pragma region 9996
-
-//int N = 0;
-//cin >> N;
-//string input,pattern, filename,pre,last;
-//vector<string> Res(N);
-//cin >> input;
-//
-////pattern = input[0];
-////pattern += ".";
-////pattern += input.substr(1);
-//
-//
-//
-//int pos= input.find("*");
-//
-//pre = input.substr(0, pos);
-//last = input.substr(pos + 1);
-//
-//
-//regex re(pre + ".*" + last);
-//
-//for (int i = 0; i < N; ++i)
-//{
-//	cin >> filename;
-//
-//	//
-//	//if (pre == filename.substr(0, pos) && last == filename.substr(filename.length() - last.length()))
-//	if(regex_match(filename,re))
-//		Res[i] = "DA";
-//	else
-//		Res[i] = "NE";
-//}
-//
-//
-//for (string str : Res)
-//cout << str << endl;
-
-#pragma endregion 9996
-
-#pragma region 2559
-//int N = 0, K = 0,res=0;
-//int sum[100] = {0,};
-//cin >> N >> K;
-//
-//vector<int> v(N+1);
-//
-//for (int i = 1; i <= N; ++i)
-//{
-//	cin >> v[i];
-//	sum[i] = sum[i - 1] + v[i];
-//}
-//
-//for (int i = K; i <= N; i++)
-//{
-//	res = max(res, (sum[i]-sum[i-K]));
-//}
-//cout << res << endl;
-
-#pragma endregion 2559
-
-#pragma region 1620
-
-//string PokeStr;
-//map<string, int> map_name;
-//map<int, string> map_num;
-//
-//int N = 1, M = 1;
-//
-//cin >> N >> M;
-//
-//for (int i = 0; i < N; ++i)
-//{
-//	cin >> PokeStr;
-//	map_name[PokeStr] = i + 1;
-//	map_num[i + 1] = PokeStr;
-//}
-//
-//for (int i = 0; i < M; ++i)
-//{
-//	cin >> PokeStr;
-//	if (atoi(PokeStr.c_str()) == 0)
-//	{
-//		cout << map_name[PokeStr] << endl;
-//	}
-//	else
-//	{
-//		cout << map_num[atoi(PokeStr.c_str())] << endl;
-//	}
-//}
-#pragma endregion 1620
-
-
-#pragma region 1213
-
-//int cnt[123] = { 0, }, flag = 0;
-//string input, res;
-//char mid = ' ';
-//
-//cin >> input;
-//
-//for (char ch : input)
-//++cnt[ch];
-//
-//for (int i = 'Z'; i >= 'A'; --i)
-//{
-//	if (cnt[i])
-//	{
-//		if (cnt[i] & 1)
-//		{
-//			mid = (char)i;
-//			--cnt[i];
-//			++flag;
-//			if (2 == flag) break;
-//		}
-//
-//		for (int j = 0; j < cnt[i]; j += 2)
-//		{
-//			res = (char)(i)+res;
-//			res += (char)i;
-//		}
-//	}
-//}
-//
-//	if (flag == 2)
-//	 cout << "I'm Sorry Hansoo" << endl;
-//	else
-//	{
-//		if(mid!=' ')
-//		res.insert(res.begin()+ res.size()/2, mid);
-//		cout << res << endl;
-//	}
-#pragma endregion 1213
-
-#pragma region 9375
-//string type, pos;
-//map<string, int> tb;
-//int N = 0, T = 0;
-//long long res = 0;
-//
-//cin >> T;
-//
-//while (T--)
-//{
-//	res = 1;
-//	tb.clear();
-//
-//	cin >> N;
-//	for (int i = 0; i < N; ++i)
-//	{
-//		cin >> type >> pos;
-//		++tb[pos];
-//	}
-//
-//	for (auto d : tb)
-//	{
-//		res *= (long long)d.second + 1;
-//	}
-//	--res;
-//
-//	cout << res << endl;
-//}
-#pragma endregion 9375
-
-#pragma region 1940
-
-//int N = 0,M=0,res=0;
-//
-//cin >> N>>M;
-//vector<int> v(N);
-//
-//for (int i = 0; i < N; ++i)
-//	cin >> v[i];
-//
-//if (M > 200000)
-//{
-//	cout << 0 << "\n";
-//	return 0;
-//}
-//
-//sort(v.begin(), v.end());
-//
-//	for (int i = 0; i < N; i++) {
-//		for (int j = i + 1; j < N; j++) {
-//			if (v[i] + v[j] == M)
-//				++res;
-//		}
-//	}
-//	cout << res << "\n";
-
-#pragma endregion 1940
-
-#pragma region 3986
-
-//ios_base::sync_with_stdio(false);
-//cin.tie(NULL); cout.tie(NULL);
-//
-//int N = 0,res=0;
-//string s;
-//
-//cin>> N;
-//
-//for (int i = 0; i < N; ++i)
-//{
-//	stack<char> stk;
-//
-//	cin >> s;
-//
-//	for (char ch : s)
-//	{
-//		if (!stk.empty() && stk.top() == ch)
-//			stk.pop();
-//		else
-//		stk.push(ch);
-//	}
-//
-//	if (!stk.size())
-//		++res;
-//}
-//
-//cout << res << endl;
-#pragma endregion 3986
-
-#pragma region 1629
-
-//ios_base::sync_with_stdio(false);
-//cin.tie(NULL); cout.tie(NULL);
-
-//long long a, b, c;
-//함수로
-//long long Divide(long long _a, long long _b)
-//{
-//	if (_b == 1) return _a % c;
-//	long long _c = Divide(_a, _b / 2);
-//	_c = (_c * _c) % c;
-//
-//	if (_b & 1)_c = (_c * _a) % c;
-//	return _c;
-//}
-//
-//cin >> a >> b >> c;
-//cout << Divide(a, b) << "\n";
-
-
-#pragma endregion 1629
-
-#pragma region 4375
-
-//int N = 0;
-//
-//while (scanf_s("%d", &N) != EOF)
-//{
-//	int cnt = 1, res = 1;
-//
-//	while (true)
-//	{
-//		if (cnt % N == 0)	// N의 배수인지 체크
-//		{
-//			cout << res << "\n";
-//			break;
-//		}
-//		else
-//		{	//11... 추가하고 N으로 나누기
-//			cnt = (cnt * 10) + 1;
-//			cnt %= N;
-//			++res;
-//		}
-//	}
-//}
-#pragma endregion 4375
-
-#pragma region 2178
-
-//// bfs
-//int dx[] = { -1,0,1,0 };
-//int dy[] = { 0,1,0,-1 };
-//int n = 0, m = 0;
-//queue<pair<int,int>> q;
-//
-//scanf_s("%d%d",&n, &m);
-//
-//vector<vector<int>> v(n,vector<int>(m));
-//vector<vector<bool>> checked(n, vector<bool>(m,false));
-//
-//	for (int i = 0; i < n; ++i)
-//	{
-//		for (int j = 0; j < m; ++j)
-//			scanf_s("%1d",&v[i][j]);
-//	}
-//
-//	checked[0][0] = true;
-//	q.push({ 0,0 });
-//
-//	while (q.size())
-//	{
-//		
-//		int cur_x =q.front().first;
-//		int cur_y =q.front().second;
-//
-//		q.pop();
-//
-//		for (int i = 0; i < 4; ++i)
-//		{
-//			int nx = cur_x + dx[i];
-//			int ny = cur_y + dy[i];
-//
-//			if (nx<0 || ny<0 || nx>=n || ny>=m || (v[nx][ny] == 0)) continue;
-//			if (checked[nx][ny]) continue;
-//
-//			v[nx][ny] = v[cur_x][cur_y] + 1;
-//
-//			q.push({ nx,ny });
-//			checked[nx][ny] = true;
-//		}
-//
-//	}
-//
-//	cout <<v[n-1][m-1]<<endl;
-
-#pragma endregion 2178
-
-#pragma region 1012
-
-
-ios_base::sync_with_stdio(false);
-cin.tie(NULL); cout.tie(NULL);
-//cin >> t;
-//
-//while (t--)
-//{
-//
-//	res = 0;
-//	cin >> m >> n >> k;
-//
-//	fill(checked.begin(), checked.end(), vector<bool>(n,false));
-//	fill(v.begin(), v.end(), vector<int>(n, 0));
-//
-//	for (int i = 0; i < k; ++i)
-//	{
-//		cin >> x >> y;
-//		v[x][y] = 1;
-//	}
-//
-//	for (int i = 0; i < m; ++i)
-//	{
-//		for (int j = 0; j < n; ++j)
-//		{
-//			if ((1 == v[i][j]) && !checked[i][j])
-//			{
-//				dfs(i, j);
-//				++res;
-//			}
-//		}
-//	}
-//
-//	cout << res << endl;
-//}
-
-#pragma endregion 1012
-
-#pragma region 2583
-
-//
-//
-//cin >> m >> n >> k;
-//
-//vector<vector<int>> v(m, vector<int>(n, 0));
-//vector<vector<bool>> checked(m, vector<bool>(n, false));
-//vector<int> res;
-//
-//for (int i = 0; i < k; ++i)
-//{
-//	cin >> posx1 >> posy1 >> posx2 >> posy2;
-//
-//	for (int j = m-posy2; j < (m-posy1); ++j)
-//	{
-//		for (int h = posx1; h < posx2; ++h)
-//		{
-//			v[j][h] = 1;
-//		}
-//	}
-//}
-//
-//for (int i = 0; i < m; ++i)
-//{
-//	for (int j = 0; j < n; ++j)
-//	{
-//		if (!checked[i][j]&& (0==v[i][j]))
-//		{
-//			cnt = 1;
-//			dfs(i, j,v,checked);
-//			res.push_back(cnt);
-//		}
-//	}
-//}
-//
-//cout << res.size() << endl;
-//
-//sort(res.begin(), res.end());
-//	for (int r : res)
-//	cout << r << " ";
-
-#pragma endregion 2583
-
-#pragma region 1992
-
-//int n;
-//cin >> n;
-//vector<vector<int>> v(n+1, vector<int>(n+1, 0));
-//
-//string s;
-//
-//for (int i = 0; i <n; ++i)
-//{
-//	cin >> s;
-//
-//	for (int j = 0; j <n; ++j)
-//	{
-//		v[i][j]=s[j];
-//	}
-//}
-//
-//cout << quard(0, 0, n,v) << endl;
-
-#pragma endregion 1992
-
-
-//int n, m, j, l, r, tmp, res=0;
-//
-//cin >> n >> m >> j;
-//l = 1;
-//
-//for (int i = 0; i < j; ++i)
-//{
-//	r = l + m - 1; // 바구니 범위
-//	cin >> tmp;
-//
-//	if (tmp >= l && tmp <= r) continue;	// 범위안이면 필요X
-//	else
-//	{
-//		if (tmp < l)
-//		{
-//			res += (l - tmp);
-//			l = tmp;
-//		}
-//		else
-//		{
-//			l += (tmp - r);
-//			res += (tmp - r);
-//
-//		}
-//	}
-//}
-//
-//cout << res << endl;
-
-#pragma region 2910
-
-//unordered_map<int, pair<int, int>> tb;
-//
-//bool cmp(tuple<int, int, int> _a, tuple<int, int, int> _b)
-//{
-//	if (get<1>(_a) == get<1>(_b))
-//	{
-//		return get<2>(_a) < get<2>(_b);
-//	}
-//
-//	return get<1>(_a) > get<1>(_b);
-//}
-
-
-//vector<tuple<int, int, int>> v;
-//int N = 0, C = 0, tmp = 0;
-//
-//cin >> N >> C;
-//for (int i = 0; i < N; ++i)
-//{
-//	cin >> tmp;
-//
-//	if (tb[tmp].first == 0)
-//		tb[tmp].second += i;
-//
-//	++tb[tmp].first;
-//}
-//
-//for (auto iter : tb)
-//{
-//	v.push_back({ iter.first, iter.second.first,iter.second.second });
-//}
-//
-//sort(v.begin(), v.end(), cmp);
-//
-//for (auto iter : v)
-//{
-//	for (int i = 0; i < get<1>(iter); ++i)
-//		cout << get<0>(iter) << " ";
-//}
-
-#pragma endregion 2910
-
-
-#pragma region 4659번
-//string s;
-//int consonant = 0, vowel = 0, size = 0,cnt=0;
-//bool ischeck = true;
-//
-//
-//	while (true)
-//	{
-//	cin >> s;
-//
-//	if (s == "end")
-//		break;
-//
-//	size = s.length();
-//	ischeck = true;
-//
-//	cnt = 0;
-//	consonant = 0;
-//	vowel = 0;
-//	
-//	for (int i=0;i<size;++i)
-//	{
-//		if (i > 0 && (s[i] == s[i - 1])&& (s[i] != 'e'&& s[i] != 'o'))
-//		{
-//			ischeck=false;
-//			break;
-//		}
-//
-//		if (Isvowel(s[i]))
-//		{
-//			++vowel, consonant = 0;
-//			++cnt;
-//		}
-//		else
-//		{
-//			++consonant, vowel = 0;
-//		}
-//
-//		if (vowel > 2 || consonant > 2)
-//		{
-//			ischeck = false;
-//			break;
-//		}
-//	}
-//
-//	if (ischeck&& cnt>0)
-//		cout << "<" << s << ">" << " is acceptable." << endl;
-//	else
-//		cout << "<" << s << ">" << " is not acceptable." << endl;
-//	
-//	}
-#pragma endregion 4659번
 #pragma endregion last
 
-#pragma region 2870
+#pragma region 3474
 
-int N = 0;
-string s,numstr;
-vector<string> v;
-cin >> N;
+	//ios_base::sync_with_stdio(false);
+	//cin.tie(NULL); cout.tie(NULL);
 
-for (int i = 0; i < N; ++i)
-{
-	cin >> s;
+	////2,5의 개수 
+
+	//int T , N ;
+	//
+	//cin >> T;
+	//
+	//for (int i = 0; i < T; ++i)
+	//{
+	//	int Res2 =0, Res5=0;
+	//	cin >>N;
+
+	//	for (int i = 2; i <= N; i *= 2)
+	//	{
+	//		Res2 += N/i;
+	//	}
+
+	//	for (int i = 5; i <= N; i *= 5)
+
+	//	{
+	//		Res5 += N/i;
+	//	}
+
+	//	cout << min(Res2, Res5) << endl;
+	//}
+
+#pragma endregion 3474
+
+#pragma region 9012
 	
-	for (char ch : s)
+	/*ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	int t = 0,res=0;
+	string s;
+	cin >> t;
+
+	for (int i = 0; i < t; ++i)
 	{
-		if (ch >= '0' && ch <= '9')
+		res = 0;
+		cin >> s;
+
+		for (char ch : s)
 		{
-			numstr += ch;
-		}
-		else
-		{
-			if (numstr.size())
+			if (ch == '(')
 			{
-				while (true)
-				{
-					if (numstr.size() && numstr.front() == '0')
-						numstr.erase(numstr.begin());
-					else
-						break;
-				}
-
-				if (!numstr.size()) numstr = "0";
-				v.push_back(numstr);
-				numstr="";
-
+				++res;
+			}
+			else
+			{
+				--res;
 			}
 
-		
+			if (res < 0) break;
 		}
-	}
 
+		if (0 == res) cout << "YES" << "\n";
+		else cout << "NO" << "\n";
+	}*/
+	
+#pragma endregion 9012
 
-	if (numstr.size())
+#pragma region 1436
+	/*int n = 0;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	cin >> n;
+	int i = 666;
+
+	while (true)
 	{
-		while (true)
+		if (to_string(i).find("666") != string::npos)
+			--n;
+		if (n == 0)
+			break;
+
+		++i;
+	}
+
+	cout << i << "\n";
+*/
+#pragma endregion 1436
+
+#pragma region 4949
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+
+	bool flag = true;
+	string s;
+	
+	while (true)
+	{
+		stack<char> stk;
+		flag = true;
+		getline(cin, s);
+
+		if (s == ".") break;
+
+		for (char ch : s)
 		{
-			if (numstr.size() && numstr.front() == '0')
-				numstr.erase(numstr.begin());
-			else
-				break;
+			if (ch == '('|| ch == '[')
+			{
+				stk.push(ch);
+			}
+			else if (ch == ')')
+			{
+				if ((0 == stk.size()) || stk.top() == '[')
+				{
+					flag = false;
+					break;
+				}
+				else
+					stk.pop();
+			}	
+			else if (ch == ']')
+			{
+				if ((0 == stk.size()) || stk.top() == '(')
+				{
+					flag = false;
+					break;
+				}
+				else
+					stk.pop();
+			}
+
 		}
 
-		if (!numstr.size()) numstr = "0";
-		v.push_back(numstr);
-
-		numstr = "";
-
+		if (flag&&stk.empty())
+			cout << "yes" << "\n";
+		else
+			cout << "no" << "\n";
 	}
-}
-
-	sort(v.begin(), v.end(), cmp);
-
-	for (string num : v)
-		cout << num << endl;
-
-#pragma endregion 2870
+#pragma endregion 4949
  	return 0;
 }
