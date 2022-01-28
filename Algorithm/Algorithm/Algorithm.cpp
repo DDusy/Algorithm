@@ -393,13 +393,28 @@ bool Isvowel(char& _ch)
 	return false;
 }
 
+string PrintTime(int& _Time)
+{
+	string m = "0"+to_string(_Time / 60);
+	string s= "0"+to_string(_Time % 60);
 
+	return	m.substr(m.size()-2,2) + ":" + s.substr(s.size()-2,2);
+}
+
+int ChangeToInt(const string& _S)
+{
+	return atoi(_S.substr(0, 2).c_str()) * 60 + atoi(_S.substr(3).c_str());
+}
+
+int ChangeToTime(const string& _a,const string& _b)
+{
+	return ChangeToInt(_b) - ChangeToInt(_a);
+}
 
 int main()
 {
 
 #pragma region last
-#pragma endregion last
 
 #pragma region 3474
 
@@ -434,7 +449,7 @@ int main()
 #pragma endregion 3474
 
 #pragma region 9012
-	
+
 	/*ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 
@@ -464,7 +479,7 @@ int main()
 		if (0 == res) cout << "YES" << "\n";
 		else cout << "NO" << "\n";
 	}*/
-	
+
 #pragma endregion 9012
 
 #pragma region 1436
@@ -490,54 +505,140 @@ int main()
 #pragma endregion 1436
 
 #pragma region 4949
+//ios_base::sync_with_stdio(false);
+//cin.tie(NULL); cout.tie(NULL);
+
+//bool flag = true;
+//string s;
+//
+//while (true)
+//{
+//	stack<char> stk;
+//	flag = true;
+//	getline(cin, s);
+
+//	if (s == ".") break;
+
+//	for (char ch : s)
+//	{
+//		if (ch == '('|| ch == '[')
+//		{
+//			stk.push(ch);
+//		}
+//		else if (ch == ')')
+//		{
+//			if ((0 == stk.size()) || stk.top() == '[')
+//			{
+//				flag = false;
+//				break;
+//			}
+//			else
+//				stk.pop();
+//		}	
+//		else if (ch == ']')
+//		{
+//			if ((0 == stk.size()) || stk.top() == '(')
+//			{
+//				flag = false;
+//				break;
+//			}
+//			else
+//				stk.pop();
+//		}
+
+//	}
+
+//	if (flag&&stk.empty())
+//		cout << "yes" << "\n";
+//	else
+//		cout << "no" << "\n";
+//}
+
+#pragma endregion 4949
+
+
+#pragma endregion last
+
+
+#pragma region 2852
+
+	//ios_base::sync_with_stdio(false);
+	//cin.tie(NULL); cout.tie(NULL);
+
+	//int N = 0,TeamNum=0,Asum=0,Bsum=0,A=0,B=0;
+	//string strTime,strPrev;
+	//
+	//cin >> N;
+	//// 작은 것 기준으로 계산
+	//for (int i = 0; i < N; ++i)
+	//{
+	//	cin >> TeamNum >> strTime;
+	//	
+	//	if (A>B)
+	//	{
+	//		Asum += ChangeToTime(strPrev, strTime);
+	//	}
+	//	else if(B>A)
+	//	{
+	//		Bsum += ChangeToTime(strPrev, strTime);
+	//	}
+
+	//	TeamNum == 1 ? ++A : ++B;
+	//	
+	//	strPrev = strTime;
+	//}
+
+	//if(A>B) 
+	//	Asum += ChangeToTime(strPrev,"48:00");
+	//else if(B>A)
+	//	Bsum += ChangeToTime(strPrev, "48:00");
+
+	//cout <<PrintTime(Asum)<< "\n";
+	//cout << PrintTime(Bsum) << "\n";
+
+
+
+#pragma endregion 2852
+
+#pragma region 17298
+
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 
-	bool flag = true;
-	string s;
-	
-	while (true)
+	int N = 0;
+	bool flag = false;
+	cin >> N;
+
+	vector<int> v(N);
+	vector<int> res;
+
+	for (int i = 0; i < N; ++i)
+		cin >> v[i];
+
+	for (int i = 0; i < N; ++i)
 	{
-		stack<char> stk;
-		flag = true;
-		getline(cin, s);
+		flag = false;
 
-		if (s == ".") break;
-
-		for (char ch : s)
+		for (int j = i+1; j < N; ++j)
 		{
-			if (ch == '('|| ch == '[')
+			if (v[i] < v[j])
 			{
-				stk.push(ch);
+				res.push_back(v[j]);
+				flag = true;
+				break;
 			}
-			else if (ch == ')')
-			{
-				if ((0 == stk.size()) || stk.top() == '[')
-				{
-					flag = false;
-					break;
-				}
-				else
-					stk.pop();
-			}	
-			else if (ch == ']')
-			{
-				if ((0 == stk.size()) || stk.top() == '(')
-				{
-					flag = false;
-					break;
-				}
-				else
-					stk.pop();
-			}
-
 		}
 
-		if (flag&&stk.empty())
-			cout << "yes" << "\n";
-		else
-			cout << "no" << "\n";
+		if (!flag)
+			res.push_back(-1);
 	}
-#pragma endregion 4949
+
+
+	for (int num : res)
+		cout << num << " ";
+
+	cout << "\n";
+#pragma endregion 17298
+
  	return 0;
-}
+}	
