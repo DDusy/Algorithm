@@ -606,35 +606,51 @@ int main()
 	cin.tie(NULL); cout.tie(NULL);
 
 	int N = 0;
-	bool flag = false;
+	
 	cin >> N;
 
-	vector<int> v(N);
-	vector<int> res;
+	vector<int> v(N,-1);
+	vector<int> Res(N,-1);
 
-	for (int i = 0; i < N; ++i)
-		cin >> v[i];
+	stack<int> stk;
 
 	for (int i = 0; i < N; ++i)
 	{
-		flag = false;
-
-		for (int j = i+1; j < N; ++j)
-		{
-			if (v[i] < v[j])
+			cin >> v[i];
+			
+			while (stk.size() && v[stk.top()] < v[i]) 
 			{
-				res.push_back(v[j]);
-				flag = true;
-				break;
+				Res[stk.top()] = v[i];
+				stk.pop();
 			}
-		}
 
-		if (!flag)
-			res.push_back(-1);
+			stk.push(i);
 	}
 
+	// 느림
+	//for (int i = 0; i < N; ++i)
+	//	cin >> v[i];
 
-	for (int num : res)
+	//for (int i = 0; i < N; ++i)
+	//{
+	//	flag = false;
+
+	//	for (int j = i+1; j < N; ++j)
+	//	{
+	//		if (v[i] < v[j])
+	//		{
+	//			res.push_back(v[j]);
+	//			flag = true;
+	//			break;
+	//		}
+	//	}
+
+	//	if (!flag)
+	//		res.push_back(-1);
+	//}
+
+
+	for (int num : Res)
 		cout << num << " ";
 
 	cout << "\n";
