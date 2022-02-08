@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <queue>
 #include <unordered_map>
+#include <assert.h>
 
 using namespace std;
 
@@ -411,6 +412,51 @@ int ChangeToTime(const string& _a,const string& _b)
 	return ChangeToInt(_b) - ChangeToInt(_a);
 }
 
+
+int n, m, a[8][8];
+
+bool checked[8][8];
+vector<pair<int, int>> v;
+
+void dfs(int _x, int _y)
+{
+	if (a[_x][_y] == 1 || checked[_x][_y]) return;
+
+	checked[_x][_y] = true;
+
+	for (int i = 0; i < 4; i++) 
+	{
+		if (_x + dx[i] < 0 || _y + dy[i] < 0 || _x + dx[i] >= n || _y + dy[i] >= m) 
+		{
+			continue;
+		}
+
+		dfs(_x + dx[i], _y + dy[i]);
+	}
+}
+
+int Solve()
+{
+	memset(checked, 0, sizeof(checked));
+	
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] == 2) dfs(i, j);
+		}
+	}
+	
+	int ans = 0;
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			if (!checked[i][j] && a[i][j] == 0) ans++;
+		}
+	}
+	return ans;
+}
+
 int main()
 {
 
@@ -557,9 +603,6 @@ int main()
 #pragma endregion 4949
 
 
-#pragma endregion last
-
-
 #pragma region 2852
 
 	//ios_base::sync_with_stdio(false);
@@ -602,30 +645,31 @@ int main()
 
 #pragma region 17298
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	//ios_base::sync_with_stdio(false);
+	//cin.tie(NULL); cout.tie(NULL);
 
-	int N = 0;
-	
-	cin >> N;
+	//int N = 0;
+	//
+	//cin >> N;
 
-	vector<int> v(N,-1);
-	vector<int> Res(N,-1);
+	//vector<int> v(N,-1);
+	//vector<int> Res(N,-1);
 
-	stack<int> stk;
+	//stack<int> stk;
 
-	for (int i = 0; i < N; ++i)
-	{
-			cin >> v[i];
-			
-			while (stk.size() && v[stk.top()] < v[i]) 
-			{
-				Res[stk.top()] = v[i];
-				stk.pop();
-			}
+	// 순회 줄이기
+	//for (int i = 0; i < N; ++i)
+	//{
+	//		cin >> v[i];
+	//		
+	//		while (stk.size() && v[stk.top()] < v[i]) 
+	//		{
+	//			Res[stk.top()] = v[i];
+	//			stk.pop();
+	//		}
 
-			stk.push(i);
-	}
+	//		stk.push(i);
+	//}
 
 	// 느림
 	//for (int i = 0; i < N; ++i)
@@ -650,11 +694,43 @@ int main()
 	//}
 
 
-	for (int num : Res)
-		cout << num << " ";
+	//for (int num : Res)
+	//	cout << num << " ";
 
-	cout << "\n";
+	//cout << "\n";
 #pragma endregion 17298
+
+#pragma endregion last
+
+
+cin >> n >> m;
+
+//입력 받기
+for (int i = 0; i < n; i++) 
+{
+	for (int j = 0; j < m; j++) 
+	{
+		cin >> a[i][j];
+		if (!a[i][j]) v.push_back({ i, j });
+	}
+}
+	assert(v.size() >= 3);
+
+	int ans = 0;
+
+for (int i = 0; i < v.size(); i++) 
+{
+	for (int j = 0; j < i; j++) 
+	{
+		for (int k = 0; k < j; k++)
+		{
+			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
+			ans = max(ans, Solve());
+			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
+		}
+	}
+}
+cout << ans;
 
  	return 0;
 }	
