@@ -16,7 +16,59 @@ public:
 	T	  Data;
 }; 
 
+template<typename T>
+class Iterator
+{
+public:
+	Iterator() :_node(nullptr) {}
+	Iterator(Node<T>* node) :_node(node) {}
 
+	Iterator& operator++()
+	{	
+		_node = _node->next;
+		return *this;
+	}
+
+	Iterator& operator++(int)
+	{
+		Iterator<T> temp = *this;
+		_node = _node->next;
+		return temp;
+	}
+
+	Iterator& operator--()
+	{
+		_node = _node->prev;
+		return *this;
+	}
+
+	Iterator& operator--(int)
+	{
+		Iterator<T> temp = *this;
+		_node = _node->prev;
+		return temp;
+	}
+
+	// *it
+	T& operator*()
+	{
+		return _node->Data;
+	}
+
+	bool operator==(const Iterator& other)
+	{
+		return _node == other._node;
+	}
+
+	bool operator!=(const Iterator& other)
+	{
+		return _node != other._node;
+	}
+
+
+public:
+	Node<T>* _node;
+};
 
 template<typename T>
 class List
@@ -24,11 +76,10 @@ class List
 public:
 	List() : _size(0)
 	{
-		// [head] <-> ... <-> [tail]
 		_head = new Node<T>();
 		_tail = new Node<T>();
-		_head->_next = _tail;
-		_tail->_prev = _head;
+		_head->next = _tail;
+		_tail->prev = _head;
 	}
 
 	~List()
@@ -47,13 +98,32 @@ public:
 
 	void pop_back()
 	{
-		RemoveNode(_tail->_prev);
+		RemoveNode(_tail->prev);
 	}
 
 private:
 	Node<T>* AddNode(Node<T>* before, const T& value);
 	Node<T>* RemoveNode(Node<T>* node);
 	int size() { return _size; }
+
+public:
+	using iterator = Iterator<T>;
+	iterator begin() { return iterator(_head->next); }
+	iterator end() { return iterator(_tail); }
+
+	//iterator 앞에 추가
+	iterator insert(iterator it, const T& value)
+	{
+		Node<T>* node = AddNode(it._node, value);
+		return iterator(node);
+	}
+
+	iterator erase(iterator it)
+	{
+		Node<T>* node = RemoveNode(it._node);
+		return iterator(node);
+	}
+
 private:
 	Node<T>* _head;
 	Node<T>* _tail;
@@ -81,11 +151,11 @@ inline Node<T>* List<T>::AddNode(Node<T>* before, const T& value)
 template<typename T>
 inline Node<T>* List<T>::RemoveNode(Node<T>* node)
 {
-	Node<T>* prevNode = node->_prev;
-	Node<T>* nextNode = node->_next;
+	Node<T>* prevNode = node->prev;
+	Node<T>* nextNode = node->next;
 
-	prevNode->_next = nextNode;
-	nextNode->_prev = prevNode;
+	prevNode->next = nextNode;
+	nextNode->prev = prevNode;
 
 	delete node;
 

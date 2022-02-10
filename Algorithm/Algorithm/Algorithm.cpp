@@ -15,6 +15,8 @@
 #include <unordered_map>
 #include <assert.h>
 
+#include "Mylist.h"
+
 using namespace std;
 
 // 비트 수 만큼의 시간 복잡도 O(n)
@@ -702,35 +704,61 @@ int main()
 
 #pragma endregion last
 
+//
+//cin >> n >> m;
+//
+////입력 받기
+//for (int i = 0; i < n; i++) 
+//{
+//	for (int j = 0; j < m; j++) 
+//	{
+//		cin >> a[i][j];
+//		if (!a[i][j]) v.push_back({ i, j });
+//	}
+//}
+//	assert(v.size() >= 3);
+//
+//	int ans = 0;
+//
+//for (int i = 0; i < v.size(); i++) 
+//{
+//	for (int j = 0; j < i; j++) 
+//	{
+//		for (int k = 0; k < j; k++)
+//		{
+//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
+//			ans = max(ans, Solve());
+//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
+//		}
+//	}
+//}
+//cout << ans;
 
-cin >> n >> m;
 
-//입력 받기
-for (int i = 0; i < n; i++) 
+List<int> li;
+
+List<int>::iterator eraseIt;
+// [ ] <-> [ ] <-> [ ] <-> [ ]  <-> [ ]  <-> [ ]
+for (int i = 0; i < 10; i++)
 {
-	for (int j = 0; j < m; j++) 
+	if (i == 5)
 	{
-		cin >> a[i][j];
-		if (!a[i][j]) v.push_back({ i, j });
+		eraseIt = li.insert(li.end(), i);
+	}
+	else
+	{
+		li.push_back(i);
 	}
 }
-	assert(v.size() >= 3);
 
-	int ans = 0;
+li.pop_back();
 
-for (int i = 0; i < v.size(); i++) 
+li.erase(eraseIt);
+
+for (List<int>::iterator it = li.begin(); it != li.end(); it++)
 {
-	for (int j = 0; j < i; j++) 
-	{
-		for (int k = 0; k < j; k++)
-		{
-			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
-			ans = max(ans, Solve());
-			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
-		}
-	}
+	cout << (*it) << endl;
 }
-cout << ans;
 
  	return 0;
 }	
