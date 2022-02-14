@@ -10,7 +10,7 @@ public:
 	Node(const T& _value) :prev(nullptr), next(nullptr), Data(_value) {}
 
 
-
+ 
 	Node* prev;
 	Node* next;
 	T	  Data;

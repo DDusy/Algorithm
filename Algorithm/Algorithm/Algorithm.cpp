@@ -441,21 +441,26 @@ int Solve()
 {
 	memset(checked, 0, sizeof(checked));
 	
+	// 바이러스
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < m; j++) {
+		for (int j = 0; j < m; j++) 
+		{
 			if (a[i][j] == 2) dfs(i, j);
 		}
 	}
 	
 	int ans = 0;
+
+	// 영역 체크
 	for (int i = 0; i < n; i++) 
 	{
 		for (int j = 0; j < m; j++) 
 		{
-			if (!checked[i][j] && a[i][j] == 0) ans++;
+			if (!checked[i][j] && a[i][j] == 0) ++ans;
 		}
 	}
+
 	return ans;
 }
 
@@ -734,31 +739,82 @@ int main()
 //}
 //cout << ans;
 
+#pragma region List_Test
 
-List<int> li;
+//List<int> li;
+//
+//List<int>::iterator eraseIt;
+//// [ ] <-> [ ] <-> [ ] <-> [ ]  <-> [ ]  <-> [ ]
+//for (int i = 0; i < 10; i++)
+//{
+//	if (i == 5)
+//	{
+//		eraseIt = li.insert(li.end(), i);
+//	}
+//	else
+//	{
+//		li.push_back(i);
+//	}
+//}
+//
+//li.pop_back();
+//
+//li.erase(eraseIt);
+//
+//for (List<int>::iterator it = li.begin(); it != li.end(); it++)
+//{
+//	cout << (*it) << endl;
+//}
+#pragma endregion List_Test
 
-List<int>::iterator eraseIt;
-// [ ] <-> [ ] <-> [ ] <-> [ ]  <-> [ ]  <-> [ ]
-for (int i = 0; i < 10; i++)
+
+
+cin >> n >> m;
+
+for (int i = 0; i < n; ++i)
 {
-	if (i == 5)
+	for (int j = 0; j < m; ++j)
 	{
-		eraseIt = li.insert(li.end(), i);
-	}
-	else
-	{
-		li.push_back(i);
+		cin >> a[i][j];
+
+		if (!a[i][j]) v.push_back({ i,j });
 	}
 }
 
-li.pop_back();
+int ans = 0;
 
-li.erase(eraseIt);
-
-for (List<int>::iterator it = li.begin(); it != li.end(); it++)
+for (int i = 0; i < v.size(); ++i)
 {
-	cout << (*it) << endl;
+	for (int j = 0; j < i; ++j)
+	{
+		for (int k = 0; k < j; ++k)
+		{
+			//순회하면서 0 체크
+			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
+			ans = max(ans,Solve());
+			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
+
+		}
+	}
 }
+
+cout << ans << endl;
+
+#pragma region 1325
+
+int dp[10001] = { 0, }, visited[10001] = {0,}; 
+int n = 0,m=0;
+
+cin >> n >> m;
+
+for (int i = 0; i < m; ++i)
+{
+	int a, b;
+	cin >> a >> b;
+}
+
+#pragma endregion 1325
+
 
  	return 0;
 }	
