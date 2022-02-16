@@ -415,54 +415,56 @@ int ChangeToTime(const string& _a,const string& _b)
 }
 
 
-int n, m, a[8][8];
+//int n, m, a[8][8];
+//
+//bool checked[8][8];
+//vector<pair<int, int>> v;
+//
+//void dfs(int _x, int _y)
+//{
+//	if (a[_x][_y] == 1 || checked[_x][_y]) return;
+//
+//	checked[_x][_y] = true;
+//
+//	for (int i = 0; i < 4; i++) 
+//	{
+//		if (_x + dx[i] < 0 || _y + dy[i] < 0 || _x + dx[i] >= n || _y + dy[i] >= m) 
+//		{
+//			continue;
+//		}
+//
+//		dfs(_x + dx[i], _y + dy[i]);
+//	}
+//}
+//
+//int Solve()
+//{
+//	memset(checked, 0, sizeof(checked));
+//	
+//	// 바이러스
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = 0; j < m; j++) 
+//		{
+//			if (a[i][j] == 2) dfs(i, j);
+//		}
+//	}
+//	
+//	int ans = 0;
+//
+//	// 영역 체크
+//	for (int i = 0; i < n; i++) 
+//	{
+//		for (int j = 0; j < m; j++) 
+//		{
+//			if (!checked[i][j] && a[i][j] == 0) ++ans;
+//		}
+//	}
+//
+//	return ans;
+//}
 
-bool checked[8][8];
-vector<pair<int, int>> v;
 
-void dfs(int _x, int _y)
-{
-	if (a[_x][_y] == 1 || checked[_x][_y]) return;
-
-	checked[_x][_y] = true;
-
-	for (int i = 0; i < 4; i++) 
-	{
-		if (_x + dx[i] < 0 || _y + dy[i] < 0 || _x + dx[i] >= n || _y + dy[i] >= m) 
-		{
-			continue;
-		}
-
-		dfs(_x + dx[i], _y + dy[i]);
-	}
-}
-
-int Solve()
-{
-	memset(checked, 0, sizeof(checked));
-	
-	// 바이러스
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++) 
-		{
-			if (a[i][j] == 2) dfs(i, j);
-		}
-	}
-	
-	int ans = 0;
-
-	// 영역 체크
-	for (int i = 0; i < n; i++) 
-	{
-		for (int j = 0; j < m; j++) 
-		{
-			if (!checked[i][j] && a[i][j] == 0) ++ans;
-		}
-	}
-
-	return ans;
-}
 
 int main()
 {
@@ -769,52 +771,90 @@ int main()
 
 
 
-cin >> n >> m;
-
-for (int i = 0; i < n; ++i)
-{
-	for (int j = 0; j < m; ++j)
-	{
-		cin >> a[i][j];
-
-		if (!a[i][j]) v.push_back({ i,j });
-	}
-}
-
-int ans = 0;
-
-for (int i = 0; i < v.size(); ++i)
-{
-	for (int j = 0; j < i; ++j)
-	{
-		for (int k = 0; k < j; ++k)
-		{
-			//순회하면서 0 체크
-			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
-			ans = max(ans,Solve());
-			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
-
-		}
-	}
-}
-
-cout << ans << endl;
+//cin >> n >> m;
+//
+//for (int i = 0; i < n; ++i)
+//{
+//	for (int j = 0; j < m; ++j)
+//	{
+//		cin >> a[i][j];
+//
+//		if (!a[i][j]) v.push_back({ i,j });
+//	}
+//}
+//
+//int ans = 0;
+//
+//for (int i = 0; i < v.size(); ++i)
+//{
+//	for (int j = 0; j < i; ++j)
+//	{
+//		for (int k = 0; k < j; ++k)
+//		{
+//			//순회하면서 0 체크
+//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
+//			ans = max(ans,Solve());
+//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
+//
+//		}
+//	}
+//}
+//
+//cout << ans << endl;
 
 #pragma region 1325
 
-int dp[10001] = { 0, }, visited[10001] = {0,}; 
-int n = 0,m=0;
+//vector<int> v[10001];
+//int dp[10001] = { 0, }, visited[10001] = { 0, };
+//int n = 0, m = 0;
+//
+//int dfs(int _num)
+//{
+//	visited[_num] = 1;
+//
+//	int res = 1;
+//
+//	for (int cur : v[_num])
+//	{
+//		if (!visited[cur])
+//			res += dfs(cur);
+//	}
+//
+//	return res;
+//}
 
-cin >> n >> m;
-
-for (int i = 0; i < m; ++i)
-{
-	int a, b;
-	cin >> a >> b;
-}
+//int res = 0;
+//
+//cin >> n >> m;
+//
+//for (int i = 0; i < m; ++i)
+//{
+//	int a, b;
+//	cin >> a >> b;
+//	v[b].push_back(a);
+//}
+//
+//
+//for (int i = 0; i < n; ++i)
+//{
+//	memset(visited, 0, sizeof(visited));
+//
+//	dp[i] = dfs(i);
+//	res = max(dp[i], res);
+//}
+//
+//for (int i = 1; i < n; ++i)
+//{
+//	if (res == dp[i]) cout << i <<" ";
+//}
 
 #pragma endregion 1325
 
+
+#pragma region 2636
+
+
+#pragma endregion 2636
 
  	return 0;
 }	
