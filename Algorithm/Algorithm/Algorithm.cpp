@@ -307,10 +307,7 @@ return 0;
 //	}
 //}
 #pragma endregion
-int dx[] = { -1,0,1,0 };
-int dy[] = { 0,1,0,-1 };
 
-int cnt = 0;
 //int m, n, k, x, y, res, nx, ny, t;
 //vector<vector<int>> v;
 //vector<vector<bool>> checked;
@@ -464,397 +461,76 @@ int ChangeToTime(const string& _a,const string& _b)
 //	return ans;
 //}
 
+int n, m, cnt = 0, cnt2 = 0;
+bool visited[100][100];
+int  board[100][100];
 
+int dx[] = { 1,0,-1,0 };
+int dy[] = { 0,1,0,-1 };
+
+void dfs(int x, int y)
+{
+	visited[x][y] = true;
+
+	if (board[x][y])
+	{
+		board[x][y] = 0;
+		++cnt2;
+		return;
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+
+		if (nx < 0 || ny < 0 || nx >= n || ny >= m || visited[nx][ny])
+			continue;
+
+		dfs(nx, ny);
+	}
+}
 
 int main()
 {
+	int bFlag = false;
+	cin >> n >> m;
 
-#pragma region last
-
-#pragma region 3474
-
-	//ios_base::sync_with_stdio(false);
-	//cin.tie(NULL); cout.tie(NULL);
-
-	////2,5의 개수 
-
-	//int T , N ;
-	//
-	//cin >> T;
-	//
-	//for (int i = 0; i < T; ++i)
-	//{
-	//	int Res2 =0, Res5=0;
-	//	cin >>N;
-
-	//	for (int i = 2; i <= N; i *= 2)
-	//	{
-	//		Res2 += N/i;
-	//	}
-
-	//	for (int i = 5; i <= N; i *= 5)
-
-	//	{
-	//		Res5 += N/i;
-	//	}
-
-	//	cout << min(Res2, Res5) << endl;
-	//}
-
-#pragma endregion 3474
-
-#pragma region 9012
-
-	/*ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-
-	int t = 0,res=0;
-	string s;
-	cin >> t;
-
-	for (int i = 0; i < t; ++i)
+	for (int i = 0; i < n; ++i)
 	{
-		res = 0;
-		cin >> s;
-
-		for (char ch : s)
+		for (int j = 0; j < m; ++j)
 		{
-			if (ch == '(')
-			{
-				++res;
-			}
-			else
-			{
-				--res;
-			}
-
-			if (res < 0) break;
+			cin >> board[i][j];
 		}
-
-		if (0 == res) cout << "YES" << "\n";
-		else cout << "NO" << "\n";
-	}*/
-
-#pragma endregion 9012
-
-#pragma region 1436
-	/*int n = 0;
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-
-	cin >> n;
-	int i = 666;
+	}
 
 	while (true)
 	{
-		if (to_string(i).find("666") != string::npos)
-			--n;
-		if (n == 0)
-			break;
+		memset(visited, 0, sizeof(visited));
+		cnt2 = 0;
+		bFlag = false;
 
-		++i;
+		dfs(0, 0);
+		++cnt;
+
+		for (int i = 0; i < n; ++i)
+		{
+			for (int j = 0; j < m; ++j)
+			{
+				if (board[i][j])
+				{
+					bFlag = true;
+					break;
+				}
+			}
+		}
+
+		if (!bFlag)
+			break;
 	}
 
-	cout << i << "\n";
-*/
-#pragma endregion 1436
+	cout << cnt << endl;
+	cout << cnt2 << endl;
 
-#pragma region 4949
-//ios_base::sync_with_stdio(false);
-//cin.tie(NULL); cout.tie(NULL);
-
-//bool flag = true;
-//string s;
-//
-//while (true)
-//{
-//	stack<char> stk;
-//	flag = true;
-//	getline(cin, s);
-
-//	if (s == ".") break;
-
-//	for (char ch : s)
-//	{
-//		if (ch == '('|| ch == '[')
-//		{
-//			stk.push(ch);
-//		}
-//		else if (ch == ')')
-//		{
-//			if ((0 == stk.size()) || stk.top() == '[')
-//			{
-//				flag = false;
-//				break;
-//			}
-//			else
-//				stk.pop();
-//		}	
-//		else if (ch == ']')
-//		{
-//			if ((0 == stk.size()) || stk.top() == '(')
-//			{
-//				flag = false;
-//				break;
-//			}
-//			else
-//				stk.pop();
-//		}
-
-//	}
-
-//	if (flag&&stk.empty())
-//		cout << "yes" << "\n";
-//	else
-//		cout << "no" << "\n";
-//}
-
-#pragma endregion 4949
-
-
-#pragma region 2852
-
-	//ios_base::sync_with_stdio(false);
-	//cin.tie(NULL); cout.tie(NULL);
-
-	//int N = 0,TeamNum=0,Asum=0,Bsum=0,A=0,B=0;
-	//string strTime,strPrev;
-	//
-	//cin >> N;
-	//// 작은 것 기준으로 계산
-	//for (int i = 0; i < N; ++i)
-	//{
-	//	cin >> TeamNum >> strTime;
-	//	
-	//	if (A>B)
-	//	{
-	//		Asum += ChangeToTime(strPrev, strTime);
-	//	}
-	//	else if(B>A)
-	//	{
-	//		Bsum += ChangeToTime(strPrev, strTime);
-	//	}
-
-	//	TeamNum == 1 ? ++A : ++B;
-	//	
-	//	strPrev = strTime;
-	//}
-
-	//if(A>B) 
-	//	Asum += ChangeToTime(strPrev,"48:00");
-	//else if(B>A)
-	//	Bsum += ChangeToTime(strPrev, "48:00");
-
-	//cout <<PrintTime(Asum)<< "\n";
-	//cout << PrintTime(Bsum) << "\n";
-
-
-
-#pragma endregion 2852
-
-#pragma region 17298
-
-	//ios_base::sync_with_stdio(false);
-	//cin.tie(NULL); cout.tie(NULL);
-
-	//int N = 0;
-	//
-	//cin >> N;
-
-	//vector<int> v(N,-1);
-	//vector<int> Res(N,-1);
-
-	//stack<int> stk;
-
-	// 순회 줄이기
-	//for (int i = 0; i < N; ++i)
-	//{
-	//		cin >> v[i];
-	//		
-	//		while (stk.size() && v[stk.top()] < v[i]) 
-	//		{
-	//			Res[stk.top()] = v[i];
-	//			stk.pop();
-	//		}
-
-	//		stk.push(i);
-	//}
-
-	// 느림
-	//for (int i = 0; i < N; ++i)
-	//	cin >> v[i];
-
-	//for (int i = 0; i < N; ++i)
-	//{
-	//	flag = false;
-
-	//	for (int j = i+1; j < N; ++j)
-	//	{
-	//		if (v[i] < v[j])
-	//		{
-	//			res.push_back(v[j]);
-	//			flag = true;
-	//			break;
-	//		}
-	//	}
-
-	//	if (!flag)
-	//		res.push_back(-1);
-	//}
-
-
-	//for (int num : Res)
-	//	cout << num << " ";
-
-	//cout << "\n";
-#pragma endregion 17298
-
-#pragma endregion last
-
-//
-//cin >> n >> m;
-//
-////입력 받기
-//for (int i = 0; i < n; i++) 
-//{
-//	for (int j = 0; j < m; j++) 
-//	{
-//		cin >> a[i][j];
-//		if (!a[i][j]) v.push_back({ i, j });
-//	}
-//}
-//	assert(v.size() >= 3);
-//
-//	int ans = 0;
-//
-//for (int i = 0; i < v.size(); i++) 
-//{
-//	for (int j = 0; j < i; j++) 
-//	{
-//		for (int k = 0; k < j; k++)
-//		{
-//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
-//			ans = max(ans, Solve());
-//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
-//		}
-//	}
-//}
-//cout << ans;
-
-#pragma region List_Test
-
-//List<int> li;
-//
-//List<int>::iterator eraseIt;
-//// [ ] <-> [ ] <-> [ ] <-> [ ]  <-> [ ]  <-> [ ]
-//for (int i = 0; i < 10; i++)
-//{
-//	if (i == 5)
-//	{
-//		eraseIt = li.insert(li.end(), i);
-//	}
-//	else
-//	{
-//		li.push_back(i);
-//	}
-//}
-//
-//li.pop_back();
-//
-//li.erase(eraseIt);
-//
-//for (List<int>::iterator it = li.begin(); it != li.end(); it++)
-//{
-//	cout << (*it) << endl;
-//}
-#pragma endregion List_Test
-
-
-
-//cin >> n >> m;
-//
-//for (int i = 0; i < n; ++i)
-//{
-//	for (int j = 0; j < m; ++j)
-//	{
-//		cin >> a[i][j];
-//
-//		if (!a[i][j]) v.push_back({ i,j });
-//	}
-//}
-//
-//int ans = 0;
-//
-//for (int i = 0; i < v.size(); ++i)
-//{
-//	for (int j = 0; j < i; ++j)
-//	{
-//		for (int k = 0; k < j; ++k)
-//		{
-//			//순회하면서 0 체크
-//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 1;
-//			ans = max(ans,Solve());
-//			a[v[i].first][v[i].second] = a[v[j].first][v[j].second] = a[v[k].first][v[k].second] = 0;
-//
-//		}
-//	}
-//}
-//
-//cout << ans << endl;
-
-#pragma region 1325
-
-//vector<int> v[10001];
-//int dp[10001] = { 0, }, visited[10001] = { 0, };
-//int n = 0, m = 0;
-//
-//int dfs(int _num)
-//{
-//	visited[_num] = 1;
-//
-//	int res = 1;
-//
-//	for (int cur : v[_num])
-//	{
-//		if (!visited[cur])
-//			res += dfs(cur);
-//	}
-//
-//	return res;
-//}
-
-//int res = 0;
-//
-//cin >> n >> m;
-//
-//for (int i = 0; i < m; ++i)
-//{
-//	int a, b;
-//	cin >> a >> b;
-//	v[b].push_back(a);
-//}
-//
-//
-//for (int i = 0; i < n; ++i)
-//{
-//	memset(visited, 0, sizeof(visited));
-//
-//	dp[i] = dfs(i);
-//	res = max(dp[i], res);
-//}
-//
-//for (int i = 1; i < n; ++i)
-//{
-//	if (res == dp[i]) cout << i <<" ";
-//}
-
-#pragma endregion 1325
-
-
-#pragma region 2636
-
-
-#pragma endregion 2636
-
- 	return 0;
-}	
+	return 0;
+}
