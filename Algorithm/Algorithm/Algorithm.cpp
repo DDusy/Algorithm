@@ -17,6 +17,9 @@
 
 #include "Mylist.h"
 
+
+#include "permutation.h"
+
 using namespace std;
 
 // 비트 수 만큼의 시간 복잡도 O(n)
@@ -493,7 +496,7 @@ void dfs(int x, int y)
 
 int main()
 {
-	int bFlag = false;
+	/*int bFlag = false;
 	cin >> n >> m;
 
 	for (int i = 0; i < n; ++i)
@@ -530,7 +533,17 @@ int main()
 	}
 
 	cout << cnt << endl;
-	cout << cnt2 << endl;
+	cout << cnt2 << endl;*/
+
+
+	vector<int> v;
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(4);
+
+
+	Pre_Permutation(4, 3, 0,v);
 
 	return 0;
 }
