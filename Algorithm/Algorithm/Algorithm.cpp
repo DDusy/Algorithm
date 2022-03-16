@@ -19,7 +19,7 @@
 
 
 #include "permutation.h"
-
+#include "Combination.h"
 using namespace std;
 
 // 비트 수 만큼의 시간 복잡도 O(n)
@@ -358,192 +358,384 @@ return 0;
 
 //}
 
-string quard(int _x, int _y, int _size, vector<vector<int>>& _v)
-{
-	if (_size == 1)	return string(1, _v[_y][_x]); // 0,1 출력
-	char b = _v[_y][_x];
-
-	string res = "";
-
-	for (int i = _y; i < _y + _size; ++i)
-	{
-		for (int j = _x; j < _x + _size; ++j)
-		{
-			if (b != _v[i][j])
-			{
-				res += "(";
-				res += quard(_x, _y, _size / 2,_v);
-				res += quard(_x+ _size / 2, _y, _size / 2,_v);
-				res += quard(_x, _y+ _size / 2, _size / 2,_v);
-				res += quard(_x + _size / 2, _y + _size / 2, _size / 2, _v);
-				res += ")";
-
-				return res;
-			}
-		}
-	}
-	
-	return string(1, _v[_y][_x]);
-}
-
-
-
-bool Isvowel(char& _ch)
-{
-	if (_ch == 'a' || _ch == 'e'|| _ch == 'i' || _ch == 'o' || _ch == 'u')
-		return true;
-
-	return false;
-}
-
-string PrintTime(int& _Time)
-{
-	string m = "0"+to_string(_Time / 60);
-	string s= "0"+to_string(_Time % 60);
-
-	return	m.substr(m.size()-2,2) + ":" + s.substr(s.size()-2,2);
-}
-
-int ChangeToInt(const string& _S)
-{
-	return atoi(_S.substr(0, 2).c_str()) * 60 + atoi(_S.substr(3).c_str());
-}
-
-int ChangeToTime(const string& _a,const string& _b)
-{
-	return ChangeToInt(_b) - ChangeToInt(_a);
-}
-
-
-//int n, m, a[8][8];
-//
-//bool checked[8][8];
-//vector<pair<int, int>> v;
-//
-//void dfs(int _x, int _y)
+//string quard(int _x, int _y, int _size, vector<vector<int>>& _v)
 //{
-//	if (a[_x][_y] == 1 || checked[_x][_y]) return;
+//	if (_size == 1)	return string(1, _v[_y][_x]); // 0,1 출력
+//	char b = _v[_y][_x];
 //
-//	checked[_x][_y] = true;
+//	string res = "";
 //
-//	for (int i = 0; i < 4; i++) 
+//	for (int i = _y; i < _y + _size; ++i)
 //	{
-//		if (_x + dx[i] < 0 || _y + dy[i] < 0 || _x + dx[i] >= n || _y + dy[i] >= m) 
+//		for (int j = _x; j < _x + _size; ++j)
 //		{
-//			continue;
-//		}
+//			if (b != _v[i][j])
+//			{
+//				res += "(";
+//				res += quard(_x, _y, _size / 2,_v);
+//				res += quard(_x+ _size / 2, _y, _size / 2,_v);
+//				res += quard(_x, _y+ _size / 2, _size / 2,_v);
+//				res += quard(_x + _size / 2, _y + _size / 2, _size / 2, _v);
+//				res += ")";
 //
-//		dfs(_x + dx[i], _y + dy[i]);
+//				return res;
+//			}
+//		}
+//	}
+//	
+//	return string(1, _v[_y][_x]);
+//}
+//
+//
+//
+//bool Isvowel(char& _ch)
+//{
+//	if (_ch == 'a' || _ch == 'e'|| _ch == 'i' || _ch == 'o' || _ch == 'u')
+//		return true;
+//
+//	return false;
+//}
+//
+//string PrintTime(int& _Time)
+//{
+//	string m = "0"+to_string(_Time / 60);
+//	string s= "0"+to_string(_Time % 60);
+//
+//	return	m.substr(m.size()-2,2) + ":" + s.substr(s.size()-2,2);
+//}
+//
+//int ChangeToInt(const string& _S)
+//{
+//	return atoi(_S.substr(0, 2).c_str()) * 60 + atoi(_S.substr(3).c_str());
+//}
+//
+//int ChangeToTime(const string& _a,const string& _b)
+//{
+//	return ChangeToInt(_b) - ChangeToInt(_a);
+//}
+//
+//
+////int n, m, a[8][8];
+////
+////bool checked[8][8];
+////vector<pair<int, int>> v;
+////
+////void dfs(int _x, int _y)
+////{
+////	if (a[_x][_y] == 1 || checked[_x][_y]) return;
+////
+////	checked[_x][_y] = true;
+////
+////	for (int i = 0; i < 4; i++) 
+////	{
+////		if (_x + dx[i] < 0 || _y + dy[i] < 0 || _x + dx[i] >= n || _y + dy[i] >= m) 
+////		{
+////			continue;
+////		}
+////
+////		dfs(_x + dx[i], _y + dy[i]);
+////	}
+////}
+////
+////int Solve()
+////{
+////	memset(checked, 0, sizeof(checked));
+////	
+////	// 바이러스
+////	for (int i = 0; i < n; i++)
+////	{
+////		for (int j = 0; j < m; j++) 
+////		{
+////			if (a[i][j] == 2) dfs(i, j);
+////		}
+////	}
+////	
+////	int ans = 0;
+////
+////	// 영역 체크
+////	for (int i = 0; i < n; i++) 
+////	{
+////		for (int j = 0; j < m; j++) 
+////		{
+////			if (!checked[i][j] && a[i][j] == 0) ++ans;
+////		}
+////	}
+////
+////	return ans;
+////}
+//
+//int n, m, cnt = 0, cnt2 = 0;
+//bool visited[100][100];
+//int  board[100][100];
+//
+//int dx[] = { 1,0,-1,0 };
+//int dy[] = { 0,1,0,-1 };
+//
+//void dfs(int x, int y)
+//{
+//	visited[x][y] = true;
+//
+//	if (board[x][y])
+//	{
+//		board[x][y] = 0;
+//		++cnt2;
+//		return;
+//	}
+//
+//	for (int i = 0; i < 4; ++i)
+//	{
+//		int nx = x + dx[i];
+//		int ny = y + dy[i];
+//
+//		if (nx < 0 || ny < 0 || nx >= n || ny >= m || visited[nx][ny])
+//			continue;
+//
+//		dfs(nx, ny);
+//	}
+//}
+
+using namespace std;
+
+//int n, m;
+//vector<pair<int, int>> vHome, vChicken;
+//vector<vector<int>> vCombi;
+//
+//void combi(int start, vector<int> v)
+//{
+//	if (v.size() == m)
+//	{
+//		vCombi.push_back(v);
+//		return;
+//	}
+//
+//	for (int i = start + 1; i < vChicken.size(); ++i)
+//	{
+//		v.push_back(i);
+//		combi(i, v);
+//		v.pop_back();
 //	}
 //}
 //
-//int Solve()
+//int main()
 //{
-//	memset(checked, 0, sizeof(checked));
-//	
-//	// 바이러스
+//	cin >> n >> m;
+//	//vector<vector<int>> board(n,vector<int>(n,0));
+//	int Total = INT_MAX;
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < n; ++j)
+//		{
+//			int tmp = 0;
+//			cin >> tmp;
+//
+//			if (tmp == 1)
+//			{
+//				vHome.push_back({ i,j });
+//			}
+//			else if (tmp == 2)
+//			{
+//				vChicken.push_back({ i,j });
+//			}
+//		}
+//	}
+//
+//	vector<int> v;
+//	combi(-1, v);
+//
+//	for (auto cList : vCombi)
+//	{
+//		int ret = 0;
+//
+//		for (pair<int, int> home : vHome)
+//		{
+//			int _min = INT_MAX;
+//
+//			for (int num : cList)
+//			{
+//				int dist = abs(home.first - vChicken[num].first) + abs(home.second - vChicken[num].second);
+//				_min = min(_min, dist);
+//			}
+//			ret += _min;
+//		}
+//
+//		Total = min(Total, ret);
+//	}
+//
+//	cout << Total << "\n";
+//
+//	return 0;
+//}
+
+//int n, r, temp, root;
+//
+//vector<int> adj[54];
+//
+//int dfs(int here)
+//{
+//	int ret = 0;
+//	int child = 0;
+//
+//	for (int there : adj[here])
+//	{
+//		if (there == r) continue;
+//		ret += dfs(there);
+//		child++;
+//	}
+//
+//	if (child == 0) return 1;
+//
+//	return ret;
+//}
+//
+//int main()
+//{
+//	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+//	cin >> n;
+//
 //	for (int i = 0; i < n; i++)
 //	{
-//		for (int j = 0; j < m; j++) 
-//		{
-//			if (a[i][j] == 2) dfs(i, j);
-//		}
+//		cin >> temp;
+//		if (temp == -1)root = i;
+//		else
+//			adj[temp].push_back(i);
 //	}
-//	
-//	int ans = 0;
 //
-//	// 영역 체크
-//	for (int i = 0; i < n; i++) 
+//	cin >> r;
+//
+//	if (r == root)
 //	{
-//		for (int j = 0; j < m; j++) 
-//		{
-//			if (!checked[i][j] && a[i][j] == 0) ++ans;
-//		}
+//		cout << 0 << "\n";
+//		return 0;
 //	}
 //
-//	return ans;
+//	cout << dfs(root) << "\n"
+//		;
+//
+//	return 0;
 //}
 
-int n, m, cnt = 0, cnt2 = 0;
-bool visited[100][100];
-int  board[100][100];
+//int n, m, Res = 0;;
+//int visited[51][51];
+//int dx[] = { 1,-1,0,0 };
+//int dy[] = { 0,0,1,-1 };
+//
+//int board[51][51];
+//
+//
+//void dfs(int x, int y)
+//{
+//	memset(visited, 0, sizeof(visited));
+//	visited[x][y] = 1;
+//
+//	queue<pair<int, int>> q;
+//	q.push({ x,y });
+//
+//	while (q.size())
+//	{
+//		pair<int, int> tmp = q.front();
+//		q.pop();
+//
+//		for (int i = 0; i < 4; ++i)
+//		{
+//			int nx =tmp.first + dx[i];
+//			int ny = tmp.second + dy[i];
+//
+//			if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+//			if (visited[nx][ny]) continue;
+//			if (board[nx][ny] == 'W') continue;
+//
+//			visited[nx][ny] = visited[tmp.first][tmp.second] + 1;
+//			q.push({ nx,ny });
+//
+//			Res = max(Res, visited[nx][ny]);
+//		}
+//		
+//
+//	}
+//
+//}
+//
+//int main()
+//{
+//	
+//	cin >> n >> m;
+//
+//	for (int i = 0; i <n ; ++i)
+//	{
+//		for (int j = 0; j < m; ++j)
+//		{
+//			char tmp = 0;
+//			cin >> tmp;
+//			board[i][j] = tmp;
+//		}
+//	}
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < m; ++j)
+//		{
+//			if (board[i][j] == 'L')
+//				dfs(i, j);
+//		}
+//	}
+//	cout<< Res-1<<"\n";
+//
+//	return 0;
+//}
 
-int dx[] = { 1,0,-1,0 };
-int dy[] = { 0,1,0,-1 };
+int n,l,r;
+int visited[51][51];
+int a[51][51];
+const int dx[] = { -1,1,0,0 };
+const int dy[] = { 0,0,-1,1 };
 
 void dfs(int x, int y)
 {
-	visited[x][y] = true;
-
-	if (board[x][y])
-	{
-		board[x][y] = 0;
-		++cnt2;
-		return;
-	}
-
 	for (int i = 0; i < 4; ++i)
 	{
 		int nx = x + dx[i];
 		int ny = y + dy[i];
 
-		if (nx < 0 || ny < 0 || nx >= n || ny >= m || visited[nx][ny])
-			continue;
+		if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
+		if (abs())
 
-		dfs(nx, ny);
+			dfs(nx, ny);
 	}
 }
 
 int main()
 {
-	/*int bFlag = false;
-	cin >> n >> m;
+
+	cin >> n >> l >> r;
 
 	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 0; j < m; ++j)
+		for (int j = 0; j < n; ++j)
 		{
-			cin >> board[i][j];
+			cin >> a[i][j];
 		}
 	}
 
 	while (true)
 	{
-		memset(visited, 0, sizeof(visited));
-		cnt2 = 0;
-		bFlag = false;
+		bool bflag = false;
 
-		dfs(0, 0);
-		++cnt;
+		memset(&visited, 0, sizeof(visited));
 
 		for (int i = 0; i < n; ++i)
 		{
-			for (int j = 0; j < m; ++j)
+			for (int j = 0; j < n; ++j)
 			{
-				if (board[i][j])
+				if (!visited[i][j])
 				{
-					bFlag = true;
-					break;
+					visited[i][j] = true;
 				}
 			}
 		}
 
-		if (!bFlag)
-			break;
+
+		break;
 	}
-
-	cout << cnt << endl;
-	cout << cnt2 << endl;*/
-
-
-	vector<int> v;
-	v.push_back(1);
-	v.push_back(2);
-	v.push_back(3);
-	v.push_back(4);
-
-
-	Pre_Permutation(4, 3, 0,v);
 
 	return 0;
 }

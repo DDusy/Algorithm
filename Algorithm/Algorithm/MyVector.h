@@ -36,7 +36,6 @@ private:
 template<typename T>
 inline void MyVector<T>::push_back(const T& _value)
 {
-
 	if (Size == Capacity)
 	{
 		int newCapacirty = static_cast<int>(Capacity * 1.5);

@@ -7,7 +7,7 @@
 	깊이를 이용
 */
 
-static int cnt = 0;
+static int Pcnt = 0;
 
 static void Pre_Permutation(int n,int r,int depth,std::vector<int>& _v)
 {
@@ -19,7 +19,9 @@ static void Pre_Permutation(int n,int r,int depth,std::vector<int>& _v)
 		}
 
 		std::cout << std::endl;
-		++cnt;
+		//++Pcnt;
+
+		std::cout << Pcnt << std::endl;
 	}
 	
 	for (int i = depth; i < n; ++i)
