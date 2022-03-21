@@ -20,6 +20,14 @@
 
 #include "permutation.h"
 #include "Combination.h"
+
+#include <boost/regex.hpp>
+
+#include <openssl//rsa.h>
+#include <openssl//pem.h>
+#include <openssl//err.h>
+
+
 using namespace std;
 
 // 비트 수 만큼의 시간 복잡도 O(n)
@@ -683,7 +691,7 @@ using namespace std;
 //	return 0;
 //}
 
-int n,l,r;
+int n,l,r,sum=0;
 int visited[51][51];
 int a[51][51];
 const int dx[] = { -1,1,0,0 };
@@ -697,9 +705,14 @@ void dfs(int x, int y)
 		int ny = y + dy[i];
 
 		if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
-		if (abs())
-
+		if (abs(a[nx][ny] - a[x][y]) >= l && abs(a[nx][ny] - a[x][y]) <= r)
+		{
+			visited[nx][ny] = 1;
+			sum += a[nx][ny];
 			dfs(nx, ny);
+		}
+
+		dfs(nx, ny);
 	}
 }
 
@@ -729,12 +742,14 @@ int main()
 				if (!visited[i][j])
 				{
 					visited[i][j] = true;
+					sum = a[i][j];
+					dfs(i, j);
 				}
 			}
 		}
 
-
-		break;
+		if(bflag)
+			break;
 	}
 
 	return 0;
