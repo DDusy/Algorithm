@@ -691,66 +691,453 @@ using namespace std;
 //	return 0;
 //}
 
-int n,l,r,sum=0;
-int visited[51][51];
-int a[51][51];
-const int dx[] = { -1,1,0,0 };
-const int dy[] = { 0,0,-1,1 };
+//int n,l,r,sum=0;
+//int visited[51][51];
+//int a[51][51];
+//
+//const int dx[] = { -1,1,0,0 };
+//const int dy[] = { 0,0,-1,1 };
+//
+//vector<pair<int, int>> vUnion;
+//
+//void dfs(int x, int y)
+//{
+//	for (int i = 0; i < 4; ++i)
+//	{
+//		int nx = x + dx[i];
+//		int ny = y + dy[i];
+//
+//		if (nx < 0 || ny < 0 || nx >= n || ny >= n||visited[nx][ny]) continue;
+//		if (abs(a[nx][ny] - a[x][y]) >= l && abs(a[nx][ny] - a[x][y]) <= r)
+//		{
+//			visited[nx][ny] = 1;
+//			sum += a[nx][ny];
+//			vUnion.push_back({ nx,ny });
+//
+//			dfs(nx, ny);
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int res = 0;
+//	cin >> n >> l >> r;
+//	
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < n; ++j)
+//		{
+//			cin >> a[i][j];
+//		}
+//	}
+//
+//	while (true)
+//	{
+//		bool bflag = false;
+//
+//		memset(&visited, 0, sizeof(visited));
+//
+//		for (int i = 0; i < n; ++i)
+//		{
+//			for (int j = 0; j < n; ++j)
+//			{
+//				if (!visited[i][j])
+//				{
+//					vUnion.clear();
+//					visited[i][j] = true;
+//					sum = a[i][j];
+//
+//					vUnion.push_back({ i,j });
+//					dfs(i, j);
+//					
+//					if (1 == vUnion.size()) continue;
+//					
+//					for (auto pos : vUnion)
+//					{
+//						a[pos.first][pos.second]= sum / vUnion.size();
+//
+//						bflag = true;
+//					}
+//
+//				}
+//			}
+//		}
+//
+//		if(!bflag)
+//			break;
+//		++res;
+//
+//	}
+//
+//
+//	cout << res << endl;
+//	return 0;
+//}
 
-void dfs(int x, int y)
+//int r, c, sx, sy, res = 0;
+//char board[1024][1024];
+//int FireCheck[1024][1024], PersonCheck[1024][1024];
+//int dx[] = { 0,0,-1,1 };
+//int dy[] = { -1,1,0,0 };
+//
+//queue<pair<int, int>> q;
+//
+//int main()
+//{
+//	cin.tie(NULL); cout.tie(NULL);
+//
+//	cin >> r >> c;
+//
+//	//크기 만큼
+//	fill(&FireCheck[0][0], &FireCheck[0][0] + 1004 * 1004, INT_MAX);
+//	for (int i = 0; i < r; ++i)
+//	{
+//		for (int j = 0; j < c; ++j)
+//		{
+//			cin >> board[i][j];
+//
+//			if (board[i][j] == 'F')
+//			{
+//				FireCheck[i][j] = 1;
+//				q.push({ i,j });
+//			}
+//
+//			if (board[i][j] == 'J')
+//			{
+//				sx = i;
+//				sy = j;
+//			}
+//		}
+//	}
+//
+//
+//	while (!q.empty())
+//	{
+//		int x = q.front().first;
+//		int y = q.front().second;
+//
+//		q.pop();
+//
+//		for (int i = 0; i < 4; ++i)
+//		{
+//			int nx = x + dx[i];
+//			int ny = y + dy[i];
+//
+//			if (nx < 0 || ny < 0 || nx >= r || ny >= c) continue;
+//			if (board[nx][ny] == '#' || FireCheck[nx][ny]!=INT_MAX) continue;
+//
+//			FireCheck[nx][ny] = FireCheck[x][y] + 1;
+//			q.push({ nx,ny });
+//		}
+//
+//	}
+//
+//	PersonCheck[sx][sy] = 1;
+//	q.push({ sx,sy });
+//
+//	while (!q.empty())
+//	{
+//		int x = q.front().first;
+//		int y = q.front().second;
+//
+//		q.pop();
+//
+//		if (x == r-1 || y == c-1 || x == 0 || y == 0)
+//		{
+//			res = PersonCheck[x][y];
+//			break;
+//		}
+//
+//		for (int i = 0; i < 4; ++i)
+//		{
+//			int nx = x + dx[i];
+//			int ny = y + dy[i];
+//
+//			if (nx < 0 || ny < 0 || nx >= r || ny >= c) continue;
+//			if (board[nx][ny] == '#' || PersonCheck[nx][ny]) continue;
+//			if (FireCheck[nx][ny] <= PersonCheck[x][y] + 1) continue;
+//
+//			PersonCheck[nx][ny] = PersonCheck[x][y] + 1;
+//			q.push({ nx,ny });
+//
+//		}
+//
+//	}
+//
+//	if (res) cout << res << "\n";
+//	else cout << "IMPOSSIBLE \n";
+//
+//	return 0;
+//
+//}
+
+
+//struct Scv
+//{
+//	int a, b, c;
+//};
+//
+//int n, ArrScv[3], Dp[64][64][64];
+//queue<Scv> q;
+//int Dmg[6][3]
+//{
+//	{9,3,1},
+//	{9,1,3},
+//	{3,9,1},
+//	{3,1,9},
+//	{1,9,3},
+//	{1,3,9}
+//};
+//
+//int solve(int _a, int _b, int _c)
+//{
+//	Dp[_a][_b][_c] = 1;
+//	q.push({ _a,_b,_c });
+//
+//	while (!q.empty())
+//	{
+//		Scv Cur;
+//		Cur.a = q.front().a;
+//		Cur.b = q.front().b;
+//		Cur.c = q.front().c;
+//		q.pop();
+//
+//		for (int i = 0; i < 6; ++i)
+//		{
+//			Scv nHp;
+//			nHp.a = max(0, Cur.a - Dmg[i][0]);
+//			nHp.b = max(0, Cur.b - Dmg[i][1]);
+//			nHp.c = max(0, Cur.c - Dmg[i][2]);
+//
+//			if (Dp[nHp.a][nHp.b][nHp.c]) continue;
+//			Dp[nHp.a][nHp.b][nHp.c] = Dp[Cur.a][Cur.b][Cur.c] + 1;
+//			q.push({ nHp.a,nHp.b,nHp.c });
+//		}
+//	}
+//	return Dp[0][0][0] - 1;
+//}
+//
+//
+//int main()
+//{
+//	cin.tie(NULL); cout.tie(NULL);
+//
+//	cin >> n;
+//
+//	for (int i = 0; i < n; ++i) cin>>ArrScv[i];
+//
+//	cout << solve(ArrScv[0], ArrScv[1], ArrScv[2]) << "\n";
+//
+//	return 0;
+//}
+
+//int Oper(char _op, int _a, int _b)
+//{
+//	if (_op == '+') return _a + _b;
+//	if (_op == '-') return _a - _b;
+//	if (_op == '*') return _a * _b;
+//
+//	return 0;
+//}
+//int main()
+//{
+//	int n,Res=0,idx=2;
+//	queue<char> qOper;
+//	int ArrNum[21] = { 0, };
+//
+//
+//	cin >> n;
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		if (i % 2 != 0)
+//		{
+//			char ch;
+//			cin >> ch;
+//			qOper.push(ch);
+//		}
+//		else
+//		{
+//			cin >> ArrNum[i];	
+//		}
+//	}
+//	
+//	Res = ArrNum[0];
+//
+//	while (!qOper.empty())
+//	{
+//		Res = Oper(qOper.front(), Res, ArrNum[idx]);
+//		qOper.pop();
+//		idx += 2;
+//	}
+//	
+//	cout << Res << endl;
+//
+//	return 0;
+//}
+
+int Partition(int Arr[],int _left,int _right)
 {
-	for (int i = 0; i < 4; ++i)
+	int pivot = Arr[_right];
+
+	int idx = _left-1;
+	for (int j = _left; j < _right; ++j)
 	{
-		int nx = x + dx[i];
-		int ny = y + dy[i];
-
-		if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
-		if (abs(a[nx][ny] - a[x][y]) >= l && abs(a[nx][ny] - a[x][y]) <= r)
+		if (Arr[j] < pivot)
 		{
-			visited[nx][ny] = 1;
-			sum += a[nx][ny];
-			dfs(nx, ny);
+			++idx;
+			swap(Arr[j],Arr[idx]);
 		}
-
-		dfs(nx, ny);
 	}
+
+	int PivotPos = idx + 1;
+	swap(Arr[_right], Arr[PivotPos]);
+
+	return PivotPos;
+}
+
+void QuickSortReculsive(int _Arr[], int _left, int _right)
+{
+	if (_left >= _right)
+		return;
+
+	int Pivot = Partition(_Arr,_left,_right);	// 피벗을 기준으로 잡고 정렬시작 피벗은 변하지 않음
+
+	QuickSortReculsive(_Arr,_left,Pivot-1);
+	QuickSortReculsive(_Arr,Pivot+1,_right);
+}
+
+vector<int> merge(vector<int> _Arr1, vector<int> _Arr2)
+{
+	vector<int> merged;
+
+	auto iter1 = _Arr1.begin();
+	auto iter2 = _Arr2.begin();
+
+	while (iter1!=_Arr1.end()&& iter2 != _Arr2.end())
+	{
+		if (*iter1 < *iter2)
+		{
+			merged.emplace_back(*iter1);
+			++iter1;
+		}
+		else
+		{
+			merged.emplace_back(*iter2);
+			++iter2;
+		}
+	}
+
+
+	if (iter1 != _Arr1.end())
+	{
+		for (; iter1 != _Arr1.end(); iter1++)
+			merged.emplace_back(*iter1);
+	}
+	else
+	{
+		for (; iter2 != _Arr2.end(); iter2++)
+			merged.emplace_back(*iter2);
+	}
+
+
+	return merged;
+}
+
+vector<int> Merge_Sort(vector<int> _Arr)
+{
+	if (_Arr.size() < 2) return _Arr;
+
+	int mid = _Arr.size() / 2;
+	auto Left_half = Merge_Sort(vector<int>(_Arr.begin(),_Arr.begin() + mid));
+	auto Right_half = Merge_Sort(vector<int>(_Arr.begin() + mid, _Arr.end()));
+
+	return merge(Left_half, Right_half);
 }
 
 int main()
 {
 
-	cin >> n >> l >> r;
+	int arr[] = { 7,2,5,1,3,8,7,4,9,6 };
+	vector<int> vTest = { 7,2,5,1,3,8,7,4,9,6 };
+	int lenght = sizeof(arr)/4;
+	
+#pragma region Bubble Sort
 
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < n; ++j)
-		{
-			cin >> a[i][j];
-		}
-	}
+	//for (int i = 0; i < lenght - 1; ++i)
+	//{
+	//	for (int j = 0; j < lenght - 1 - i; ++j)
+	//	{
+	//		if (arr[j] > arr[j + 1])
+	//		{
+	//			int tmp = arr[j];
+	//			arr[j]= arr[j+1];
+	//			arr[j+1]=tmp;
+	//		}
+	//	}
+	//}
 
-	while (true)
-	{
-		bool bflag = false;
+#pragma endregion
 
-		memset(&visited, 0, sizeof(visited));
+#pragma region Select Sort
+	
+	//int min = 0;
 
-		for (int i = 0; i < n; ++i)
-		{
-			for (int j = 0; j < n; ++j)
-			{
-				if (!visited[i][j])
-				{
-					visited[i][j] = true;
-					sum = a[i][j];
-					dfs(i, j);
-				}
-			}
-		}
+	//for (int i = 0; i < lenght - 1; ++i)
+	//{
+	//	min = i;
 
-		if(bflag)
-			break;
-	}
+	//	for (int j = i;  j < lenght; ++j)
+	//	{
+	//		if (arr[min] > arr[j])
+	//			min = j;
+
+	//	}
+
+	//	int tmp = arr[i];
+	//	arr[i] = arr[min];
+	//	arr[min] = tmp;
+	//}
+
+#pragma endregion
+
+#pragma region Insert Sort
+	
+	//for (int i = 0; i < lenght-1; ++i)
+	//{
+	//	int j = i;
+
+	//	while(j>=0&&(arr[j] > arr[j+1])) //정렬이 필요할때만
+	//	{
+	//			int tmp = arr[j];
+	//			arr[j] = arr[j+1];
+	//			arr[j+1] = tmp;
+	//			--j;
+	//	}
+	//}
+
+#pragma endregion
+
+#pragma region Quick Sort
+
+	QuickSortReculsive(arr, 0, lenght-1);
+
+#pragma endregion
+
+#pragma region Merge Sort
+
+	vector<int> v= Merge_Sort(vTest);
+#pragma endregion
+
+#pragma region HeapSort
+#pragma endregion
+
+
+	for (auto a : v)
+		cout << a << " " ;
+
+	cout << endl;
 
 	return 0;
 }
