@@ -30,86 +30,50 @@
 
 using namespace std;
 
-const int INF=987654321;
-int n,m,a[11],Tmp,Res=INF,comp[11],visited[11];
-vector<int> adj[11];
+int R,C,res,nx,ny;
+char a[21][21];
+const int dx[]= {-1,1,0,0};
+const int dy[] = { 0,0,-1,1 };
 
-pair<int, int> dfs(int here, int _value)
+void solve(int _x, int _y, int _num, int _cnt)
 {
-	visited[here]=1;
-	pair<int,int> res= {1,a[here]};
-	for (int i: adj[here])
+	res = max(res,_cnt);
+	
+	for (int i = 0; i < 4; ++i)
 	{
-		if(comp[i] != _value) continue;
-		if(visited[i]) continue;
+		nx= _x+ dx[i];
+		ny = _y + dy[i];
 
-		pair<int,int> tmp= dfs(i,_value);
-		res.first +=tmp.first;
-		res.second += tmp.second;
+		if(nx<0||ny<0||nx>=R||ny>=C) continue;
+		
+		int _next =(1<<(int)(a[nx][ny]-'A'));
+		
+		if ((_num & _next) == 0)
+		{	
+			//스택프레임 이용
+			solve(nx,ny,_num|_next,_cnt+1);
+		}
 	}
 
-	return res;
+	return;
 }
+
+
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	std::cin.tie(NULL);
-	std::cout.tie(NULL);
+	cin>>R>>C;
 
-	cin>>n;
-
-	//인구수
-	for(int i=1;i<=n;++i)
-		cin>>a[i];
-
-	// 인접 구역 정보
-	for(int i=1;i<=n;++i)
+	for (int i = 0; i < R; ++i)
 	{
-		cin>>m;	// 인접한 구역의 수 
-		for (int j = 0; j < m; ++j)
+		for (int j = 0; j < C; ++j)
 		{
-			cin>>Tmp;	// 인접 구역의 번호 / 서로 연결
-			adj[i].push_back(Tmp);
-			adj[Tmp].push_back(i);
+			cin>>a[i][j];
 		}
 	}
-		
-	// 경우의 수 최대
-	for (int i = 1; i <(1<<n)-1; ++i)
-	{	
-		memset(&comp,0,sizeof(comp));
-		memset(&visited, 0, sizeof(visited));	// 초기화
 
-		int idx1= -1; int idx2 = -1;
+	solve(0,0,1<<(int)(a[0][0]-'A'),1);
 
-		//2개의 connected component인지 확인
-		for (int j = 0; j < n; ++j)
-		{
-			if(i & (1<<j))	 //모든 경우의 수중 연결되있으면 인덱스 증가
-			{
-				comp[j+1]=1;
-				idx1= j+1;	
-			}
-			else
-			{
-				idx2=j+1;
-			}
-		}
-
-		pair<int,int> cmp1= dfs(idx1,1);
-		pair<int, int> cmp2= dfs(idx2, 0);
-
-		if(cmp1.first + cmp2.first ==n) // 다합쳐서 n
-		Res =min(Res,abs(cmp1.second - cmp2.second)); 
-
-	}
-
-	std::cout<<(Res == INF ? -1  : Res)<<"\n";
-
-	/*int i =5;
-
-	cout<<(n&-n);*/
+	cout<<res<<endl;
 
 	return 0;
-
 }
