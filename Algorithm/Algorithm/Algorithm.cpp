@@ -30,50 +30,86 @@
 
 using namespace std;
 
-int R,C,res,nx,ny;
-char a[21][21];
-const int dx[]= {-1,1,0,0};
-const int dy[] = { 0,0,-1,1 };
+int m, n, cnt = 0, mx, big;
+int board[51][51] = { 0, }, visited[51][51] = { 0, }, Rooms[51];
 
-void solve(int _x, int _y, int _num, int _cnt)
+int dx[] = { 0,-1,0,1 };
+int dy[] = { -1,0,1,0};
+
+int dfs(int x, int y, int cnt)
 {
-	res = max(res,_cnt);
-	
+	if (visited[x][y]) return 0;
+	visited[x][y] = cnt;
+
+	int res = 1;
+
 	for (int i = 0; i < 4; ++i)
 	{
-		nx= _x+ dx[i];
-		ny = _y + dy[i];
+		if (!(board[x][y] & (1 << i)))
+		{
+			int nx = x + dx[i];
+			int ny = y + dy[i];
 
-		if(nx<0||ny<0||nx>=R||ny>=C) continue;
-		
-		int _next =(1<<(int)(a[nx][ny]-'A'));
-		
-		if ((_num & _next) == 0)
-		{	
-			//스택프레임 이용
-			solve(nx,ny,_num|_next,_cnt+1);
+			if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+
+			res += dfs(nx, ny, cnt);
 		}
 	}
 
-	return;
+	return res;
 }
-
 
 int main()
 {
-	cin>>R>>C;
+	cin >> m >> n;
 
-	for (int i = 0; i < R; ++i)
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 0; j < C; ++j)
+		for (int j = 0; j < m; ++j)
 		{
-			cin>>a[i][j];
+			cin >> board[i][j];
 		}
 	}
 
-	solve(0,0,1<<(int)(a[0][0]-'A'),1);
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < m; ++j)
+		{
+			if (!visited[i][j])
+			{
+				++cnt;
+				Rooms[cnt] = dfs(i, j, cnt);
+				mx = max(mx, Rooms[cnt]);
+			}
+		}
+	}
 
-	cout<<res<<endl;
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < m; ++j)
+		{
+			int cur = visited[i][j];
+			if (i + 1 < n)
+			{
+				int tmp = visited[i + 1][j];
 
+				if(cur!=tmp)
+				big = max(big, Rooms[cur] + Rooms[tmp]);
+
+			}
+
+			if (j + 1 < m)
+			{
+				
+				int tmp = visited[i][j + 1];
+
+				if (cur != tmp)
+				big = max(big, Rooms[cur] + Rooms[tmp]);
+			}
+		}
+	}
+
+
+	cout << cnt << "\n" << mx << "\n" << big << "\n";
 	return 0;
 }
