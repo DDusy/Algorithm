@@ -28,62 +28,63 @@
 #include <openssl//err.h>
 
 
-int n,res=987654321;
+//int n,m,res=987654321,high=0,low=0;
 
-int s[20][20]={0,};
-int visited[20]={0,};
-
-
-int main()
+struct point
 {
-	cin >> n;
+	int x,y;
+};
+
+int n,m,high,low;
+int a[100001]={0,};
+
+
+bool check(int _mid)
+{
+	int cnt=1;
+	int remain=_mid;
 
 	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 0; j < n; ++j)
+		if(_mid-a[i]>=0)
 		{
-			cin >> s[i][j];
+			_mid-=a[i];
 		}
+		else
+		{
+			_mid= remain;
+			++cnt;
+			if(a[i]>_mid) return false;
+			else _mid -=a[i];
+		}
+
 	}
 
-	for (int i = 0; i < (1 << n); ++i)
+	return cnt<=m;
+}
+int main()
+{	
+	cin>>n>>m;
+
+	for (int i = 0; i <n; ++i)
 	{
-		int cnt = 0;
-		for (int j = 0; j < n; ++j)
-		{
-			if (i & (1 << j))++cnt;
-		}
-
-		if (n / 2 != cnt) continue;
-
-		vector<int> vTeam1, vTeam2;
-		for (int j = 0; j < n; ++j)
-		{
-			if (i & (1 << j))
-				vTeam1.push_back(j);
-			else
-				vTeam2.push_back(j);
-		}
-
-		int t1 = 0, t2 = 0;
-		for (int j = 0; j < (n / 2); ++j)
-		{
-			for (int h = 0; h < (n / 2); ++h)
-			{
-
-				t1 += s[vTeam1[j]][vTeam1[h]];
-				t2 += s[vTeam2[j]][vTeam2[h]];
-			}
-
-		}
-
-		int diff = t1 - t2;
-		if (diff < 0) diff = -diff;
-
-		res = min(res, diff);
+		cin>>a[i];
+		high+=a[i];
 	}
 
-	cout << res << '\n';
+	while (low<=high)
+	{
+		int mid=  (low + high)/2;
 
-	return 0;
+		if (check(mid))
+		{
+			high= mid-1;
+		}
+		else 
+		{
+			low= mid+1;
+		}
+	}
+
+	cout<<low<<endl;
 }
